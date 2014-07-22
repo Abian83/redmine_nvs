@@ -1,0 +1,19 @@
+= stylesheet_link_tag      "menu.css",  :plugin => "redmine_nvs"
+= javascript_include_tag   "menu.js",   :plugin => "redmine_nvs"
+
+%div#cssmenu
+  %ul
+    %li.active
+      %a{:href => nvs_subsystems_path( :project_id => session[:project_id] )}
+        %span
+          = t "Home"
+
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Subprojects"
+        %ul
+          %li
+            = link_to (t 'Show'), nvs_subsystems_path( :project_id => session[:project_id] )
+          %li.has-sub
+            = link_to (t 'New'), new_nvs_subsystem_path

@@ -1,0 +1,17 @@
+# English strings go here for Rails i18n
+es:
+
+  Subsystem List:         Lista de Subsitemas
+  Internal Name:          Nombre Interno
+  New Subsystem:          Nuevo Subsistema
+  Are you sure:           Estas seguro
+  Name:                   Nombre
+  Project:                Projecto
+  Save:                   Guardar
+  Project Id:             Id de Proyecto
+  Home:                   Principal
+  Subprojects:            Subprojectos
+  New:                    Nuevo
+  Show:                   Ver
+  Edit:                   Editar
+  Back:                   Atrás

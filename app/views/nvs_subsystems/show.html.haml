@@ -1,0 +1,17 @@
+= render partial: 'layouts/menu'
+
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_subsystem.name
+%p
+  %b Internal name:
+  = @nvs_subsystem.internal_name
+%p
+  %b Project:
+  = @nvs_subsystem.project_id
+
+= link_to (t 'Edit'), edit_nvs_subsystem_path(@nvs_subsystem)
+\|
+= link_to (t 'Back') , nvs_subsystems_path

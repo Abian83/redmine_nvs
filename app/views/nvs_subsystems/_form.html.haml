@@ -1,0 +1,19 @@
+= form_for @nvs_subsystem do |f|
+  - if @nvs_subsystem.errors.any?
+    #error_explanation
+      //%h2= "#{pluralize(@nvs_subsystem.errors.count, "error")} prohibited this nvs_subsystem from being saved:"
+      %ul
+        - @nvs_subsystem.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label t "Name"
+    = f.text_field :name
+  .field
+    = f.label   t "Internal Name"
+    = f.text_field :internal_name
+  .field
+    = f.label  t "Project Id"
+    = f.number_field :project_id
+  .actions
+    = f.submit t "Save"

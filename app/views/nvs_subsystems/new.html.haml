@@ -1,0 +1,7 @@
+= render partial: 'layouts/menu'
+
+%h1 New nvs_subsystem
+
+= render 'form'
+
+= link_to (t 'Backs'), nvs_subsystems_path(:project_id => session[:project_id] )

@@ -14,6 +14,24 @@
           = t "Subprojects"
         %ul
           %li
-            = link_to (t 'Show'), nvs_subsystems_path( :project_id => session[:project_id] )
-          %li.has-sub
-            = link_to (t 'New'), new_nvs_subsystem_path
+            = link_to (t 'Index'), nvs_subsystems_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_subsystem_path
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Departament of Projects"
+        %ul
+          %li
+            = link_to (t 'Index'), nvs_dept_projects_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_dept_project_path
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Departaments"
+        %ul
+          %li
+            = link_to (t 'Index'), nvs_depts_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_dept_path

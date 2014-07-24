@@ -1,0 +1,2 @@
+module NvsDeptProjectsHelper
+end

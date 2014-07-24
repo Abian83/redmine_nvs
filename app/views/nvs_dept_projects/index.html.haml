@@ -1,0 +1,34 @@
+= render partial: 'layouts/menu'
+
+%h1
+  = t "Departament Project List"
+
+.autoscroll
+  %table.list
+    %tr
+      %th
+        = t "Name"
+      %th
+        = t "Nvs dept"
+      %th
+        = t "Project"
+      %th
+        = t "Internal Name"
+      %th
+        = t "Nvs subsystem"
+      %th
+      %th
+
+    - @nvs_dept_projects.each do |nvs_dept_project|
+      %tr{:class => "#{cycle('odd', 'even')}"}
+        %td= link_to nvs_dept_project.name, nvs_dept_project
+        %td= nvs_dept_project.nvs_dept.name
+        %td= nvs_dept_project.project.name
+        %td= nvs_dept_project.internal_name
+        %td= nvs_dept_project.nvs_subsystem.name
+        %td= link_to image_tag('edit.png'), edit_nvs_dept_project_path(nvs_dept_project)
+        %td= link_to image_tag('delete.png'), nvs_dept_project, :method => :delete, :data => { :confirm => (t 'Are you sure') }
+
+  %br
+
+  = link_to (t 'New Nvs dept project') , new_nvs_dept_project_path

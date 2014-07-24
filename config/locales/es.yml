@@ -1,7 +1,7 @@
 # English strings go here for Rails i18n
 es:
 
-  Subsystem List:         Lista de Subsitemas
+  Subsystem List:         Lista de Subsistemas
   Internal Name:          Nombre Interno
   New Subsystem:          Nuevo Subsistema
   Are you sure:           Estas seguro
@@ -15,3 +15,8 @@ es:
   Show:                   Ver
   Edit:                   Editar
   Back:                   Atrás
+  Index:                  Mostrar
+  Departament Project List:         Lista de Proyectos de Departamento
+  Departament of Projects:     Proyectos de Departamanto
+  Save:                   Guardar
+  Departaments:           Departamentos

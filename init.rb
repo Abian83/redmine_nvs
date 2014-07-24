@@ -15,8 +15,16 @@ Redmine::Plugin.register :redmine_nvs do
 
 
   project_module :redmine_nvs do
+    
     permission :view_nvs_subsystems, :nvs_subsystems => [:index, :show]
-    permission :edit_nvs_subsystems, :nvs_subsystems => [:edit,:new,:create,:destroy]
+    permission :edit_nvs_subsystems, :nvs_subsystems => [:edit,:new,:create,:destroy,:update]
+
+    permission :view_nvs_dept_projects, :nvs_dept_projects => [:index, :show]
+    permission :edit_nvs_dept_projects, :nvs_dept_projects => [:edit,:new,:create,:destroy,:update]
+
+    permission :view_nvs_depts, :nvs_depts => [:index, :show]
+    permission :edit_nvs_depts, :nvs_depts => [:edit,:new,:create,:destroy,:update]
+
   end
 
 end

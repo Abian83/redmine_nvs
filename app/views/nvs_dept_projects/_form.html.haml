@@ -1,0 +1,22 @@
+= form_for @nvs_dept_project do |f|
+  - if @nvs_dept_project.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_dept_project.errors.count, "error")} prohibited this nvs_dept_project from being saved:"
+      %ul
+        - @nvs_dept_project.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label  :nvs_dept_id
+    = f.select :nvs_dept_id, @departaments
+  .field
+    = f.label :internal_name
+    = f.text_field :internal_name
+  .field
+    = f.label  :nvs_subsystem_id
+    = f.select :nvs_subsystem_id, @subsystems
+  .actions
+    = f.submit t 'Save'

@@ -45,6 +45,7 @@ class NvsSubsystemsController < ApplicationController
   # POST /nvs_subsystems.json
   def create
     @nvs_subsystem = NvsSubsystem.new(params[:nvs_subsystem])
+    @nvs_subsystem.project_id = session[:project_id]
 
     respond_to do |format|
       if @nvs_subsystem.save
@@ -85,8 +86,6 @@ class NvsSubsystemsController < ApplicationController
     end
   end
 
-  def dummy
-  end
 
   private
 

@@ -49,7 +49,6 @@ class NvsSubsystemsController < ApplicationController
     @nvs_subsystem = NvsSubsystem.new(params[:nvs_subsystem])
     @nvs_subsystem.project_id = session[:project_id]
 
-    binding.pry
     params['depts_project_ids'].each do |dp|
         #binding.pry
         clone_dp = NvsDeptProject.find(dp).dup #get dept_project selected.
@@ -74,7 +73,7 @@ class NvsSubsystemsController < ApplicationController
   # PUT /nvs_subsystems/1.json
   def update
     @nvs_subsystem = NvsSubsystem.find(params[:id])
-    
+
     respond_to do |format|
       if @nvs_subsystem.update_attributes(params[:nvs_subsystem])
         format.html { redirect_to @nvs_subsystem, notice: 'Nvs subsystem was successfully updated.' }

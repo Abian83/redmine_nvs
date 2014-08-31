@@ -46,7 +46,6 @@ class NvsDeptUsersController < ApplicationController
   # POST /nvs_dept_users.json
   def create
     @nvs_dept_user = NvsDeptUser.new(params[:nvs_dept_user])
-    binding.pry
     respond_to do |format|
       if @nvs_dept_user.save
         format.html { redirect_to @nvs_dept_user, notice: 'Nvs dept user was successfully created.' }

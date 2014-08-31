@@ -98,7 +98,6 @@ class NvsDeptsController < ApplicationController
   end
 
   def users2dept
-    binding.pry
     @depts = NvsDept.all.map{|x| [x.name,x.id]}
     @users = User.all.map{|x| [x.name,x.id]}
     @authLevels = NvsDeptUser.levels.map{|x| [x[0].to_s,x[1].to_s]}

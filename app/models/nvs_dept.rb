@@ -10,5 +10,6 @@ class NvsDept < ActiveRecord::Base
   validates :project_id, presence: true
 
   belongs_to :project
+  has_many   :nvs_depts_projects
 
 end

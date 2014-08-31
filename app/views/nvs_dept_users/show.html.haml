@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Nvs dept:
+  = @nvs_dept_user.nvs_dept_id
+%p
+  %b User:
+  = @nvs_dept_user.user_id
+%p
+  %b Authorization level:
+  = @nvs_dept_user.authorization_level
+%p
+  %b Temp authorization level:
+  = @nvs_dept_user.temp_authorization_level
+%p
+  %b Project:
+  = @nvs_dept_user.project_id
+%p
+  %b Temp start date:
+  = @nvs_dept_user.temp_start_date
+%p
+  %b Temp end date:
+  = @nvs_dept_user.temp_end_date
+
+= link_to 'Edit', edit_nvs_dept_user_path(@nvs_dept_user)
+\|
+= link_to 'Back', nvs_dept_users_path

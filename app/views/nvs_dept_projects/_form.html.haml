@@ -10,13 +10,7 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label  :nvs_dept_id
-    = f.select :nvs_dept_id, @departaments
-  .field
     = f.label :internal_name
     = f.text_field :internal_name
-  .field
-    = f.label  :nvs_subsystem_id
-    = f.select :nvs_subsystem_id, @subsystems
   .actions
     = f.submit t 'Save'

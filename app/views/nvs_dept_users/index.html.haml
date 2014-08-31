@@ -1,0 +1,44 @@
+= render partial: 'layouts/menu'
+
+%h1
+  = t 'Listing nvs_dept_users'
+
+.autoscroll
+  %table.list
+    %tr
+      %th
+        = t 'User'
+      %th
+        = t 'Nvs dept'
+      %th
+        = t 'Authorization level'
+      %th
+        = t 'Temp authorization level'
+      %th
+        = t 'Project'
+      %th
+        = t 'Temp start date'
+      %th
+        = t 'Temp end date'
+      %th
+      //%th
+      %th
+
+    - @nvs_dept_users.each do |nvs_dept_user|
+      %tr{:class => "#{cycle('odd', 'even')}"}
+        %td= nvs_dept_user.user.name unless nvs_dept_user.user.blank?
+        %td
+          = ((nvs_dept_user.nvs_dept_id.blank?) ? "Unassigned" : nvs_dept_user.nvs_dept.name)
+        %td
+        %td= nvs_dept_user.authorization_level
+        %td= nvs_dept_user.temp_authorization_level
+        %td= nvs_dept_user.project_id
+        %td= nvs_dept_user.temp_start_date
+        %td= nvs_dept_user.temp_end_date
+        //%td= link_to 'Show', nvs_dept_user
+        %td= link_to image_tag('edit.png'), edit_nvs_dept_user_path(nvs_dept_user)
+        %td= link_to image_tag('delete.png'), nvs_dept_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+= link_to 'New Nvs dept user', new_nvs_dept_user_path

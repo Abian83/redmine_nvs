@@ -1,0 +1,31 @@
+= form_for @nvs_dept_user do |f|
+  - if @nvs_dept_user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_dept_user.errors.count, "error")} :"
+      %ul
+        - @nvs_dept_user.errors.full_messages.each do |msg|
+          %li= msg
+
+  //.field
+  //= f.label :nvs_dept_id
+  //= f.number_field :nvs_dept_id
+  .field
+    = f.label :user_id
+    = f.select :user_id , @users
+  .field
+    = f.label :authorization_level
+    = f.select :authorization_level , @authLevels
+  .field
+    = f.label :temp_authorization_level
+    = f.select :temp_authorization_level, @tmp_authLevels
+  //.field
+  //= f.label :project_id
+  //= f.number_field :project_id
+  .field
+    = f.label :temp_start_date
+    = f.datetime_select :temp_start_date
+  .field
+    = f.label :temp_end_date
+    = f.datetime_select :temp_end_date
+  .actions
+    = f.submit 'Save'

@@ -12,5 +12,11 @@
   .field
     = f.label   t "Internal Name"
     = f.text_field :internal_name
+  .ul
+    - @dept_projects.each do |depts_project|
+      .li
+        = check_box_tag 'depts_project_ids[]',  depts_project[1].to_s
+        = depts_project[0]
+        
   .actions
     = f.submit t "Save"

@@ -28,7 +28,7 @@ class NvsDeptsController < ApplicationController
   # GET /nvs_depts/new.json
   def new
     @nvs_dept = NvsDept.new
-
+    prepare_combos
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @nvs_dept }
@@ -37,6 +37,7 @@ class NvsDeptsController < ApplicationController
 
   # GET /nvs_depts/1/edit
   def edit
+    prepare_combos
     @nvs_dept = NvsDept.find(params[:id])
   end
 
@@ -45,6 +46,18 @@ class NvsDeptsController < ApplicationController
   def create
     @nvs_dept = NvsDept.new(params[:nvs_dept])
     @nvs_dept.project_id = session[:project_id]
+
+
+    params['depts_project_ids'].each do |dp|
+        #binding.pry
+        clone_dp = NvsDeptProject.find(dp).dup #get dept_project selected.
+        clone_dp.nvs_dept = @nvs_dept
+        clone_dp.project_id = session[:project_id]
+        clone_dp.save
+    end
+
+
+
     respond_to do |format|
       if @nvs_dept.save
         format.html { redirect_to @nvs_dept, notice: 'Nvs dept was successfully created.' }
@@ -84,6 +97,14 @@ class NvsDeptsController < ApplicationController
     end
   end
 
+  def users2dept
+    binding.pry
+    @depts = NvsDept.all.map{|x| [x.name,x.id]}
+    @users = User.all.map{|x| [x.name,x.id]}
+    @authLevels = NvsDeptUser.levels.map{|x| [x[0].to_s,x[1].to_s]}
+    @tmp_authLevels = NvsDeptUser.temp_levels.map{|x| [x[0].to_s,x[1].to_s]}
+  end
+
 
   private
 
@@ -97,6 +118,11 @@ class NvsDeptsController < ApplicationController
       @project = Project.find(session[:project_id])
     end
 
+  end
+
+  def prepare_combos
+    #depts_projects with nvs_dept_id = 0 represent the list of projects to add, loaded once when NVS plugin is installed.
+    @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_dept_id => 0).map{|dp| [dp.name, dp.id]}
   end
 
 

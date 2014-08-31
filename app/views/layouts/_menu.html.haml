@@ -11,7 +11,7 @@
     %li.has-sub
       %a{:href => "#"}
         %span
-          = t "Subprojects"
+          = t "Subsystems"
         %ul
           %li
             = link_to (t 'Index'), nvs_subsystems_path( :project_id => session[:project_id] )
@@ -35,3 +35,14 @@
             = link_to (t 'Index'), nvs_depts_path( :project_id => session[:project_id] )
           %li
             = link_to (t 'New'),  new_nvs_dept_path
+          %li
+            = link_to (t 'Add users to dept'),  users2dept_nvs_depts_path
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Users"
+        %ul
+          %li
+            = link_to (t 'Index'), nvs_dept_users_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_dept_user_path

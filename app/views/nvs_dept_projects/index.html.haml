@@ -9,23 +9,23 @@
       %th
         = t "Name"
       %th
-        = t "Nvs dept"
-      %th
-        = t "Project"
-      %th
         = t "Internal Name"
       %th
+        = t "Nvs Dept"
+      %th
         = t "Nvs subsystem"
+      %th
+        = t "Redmine Project"
       %th
       %th
 
     - @nvs_dept_projects.each do |nvs_dept_project|
       %tr{:class => "#{cycle('odd', 'even')}"}
         %td= link_to nvs_dept_project.name, nvs_dept_project
-        %td= nvs_dept_project.nvs_dept.name
-        %td= nvs_dept_project.project.name
         %td= nvs_dept_project.internal_name
-        %td= nvs_dept_project.nvs_subsystem.name
+        %td= nvs_dept_project.nvs_dept.name unless nvs_dept_project.nvs_dept.blank?
+        %td= nvs_dept_project.nvs_subsystem.name unless nvs_dept_project.nvs_subsystem.blank?
+        %td= nvs_dept_project.project.name  unless nvs_dept_project.project.blank?
         %td= link_to image_tag('edit.png'), edit_nvs_dept_project_path(nvs_dept_project)
         %td= link_to image_tag('delete.png'), nvs_dept_project, :method => :delete, :data => { :confirm => (t 'Are you sure') }
 

@@ -7,7 +7,7 @@ class NvsDeptProject < ActiveRecord::Base
   validates :internal_name, length: { maximum: 5,
      too_long: "%{count} characters is the maximum allowed" }, :presence => true
 
-  validates :nvs_dept_id,:nvs_subsystem_id,:project_id, presence: true
+  validates :project_id, presence: true
 
   belongs_to :project
   belongs_to :nvs_subsystem

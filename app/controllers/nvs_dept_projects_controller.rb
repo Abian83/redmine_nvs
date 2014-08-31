@@ -6,7 +6,7 @@ class NvsDeptProjectsController < ApplicationController
   # GET /nvs_dept_projects
   # GET /nvs_dept_projects.json
   def index
-    @nvs_dept_projects = NvsDeptProject.all
+    @nvs_dept_projects = NvsDeptProject.order('name ASC').all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,8 +46,12 @@ class NvsDeptProjectsController < ApplicationController
   # POST /nvs_dept_projects
   # POST /nvs_dept_projects.json
   def create
+    #binding.pry
     @nvs_dept_project = NvsDeptProject.new(params[:nvs_dept_project])
+    @nvs_dept_project.nvs_subsystem_id = 0
+    @nvs_dept_project.nvs_dept_id = 0
     @nvs_dept_project.project_id = session[:project_id]
+
     respond_to do |format|
       if @nvs_dept_project.save
         format.html { redirect_to @nvs_dept_project, notice: 'Nvs dept project was successfully created.' }
@@ -86,7 +90,7 @@ class NvsDeptProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
 
   private
 
@@ -103,8 +107,6 @@ class NvsDeptProjectsController < ApplicationController
 
   def prepare_combos
 
-    @subsystems = NvsSubsystem.where(project_id: session[:project_id]).map{|subs| [subs.name, subs.id]}
-    @departaments = NvsDept.where(project_id: session[:project_id]).map{|dep| [dep.name, dep.id]}
 
   end
 

@@ -29,6 +29,7 @@ class NvsSubsystemsController < ApplicationController
   # GET /nvs_subsystems/new.json
   def new
     @nvs_subsystem = NvsSubsystem.new
+    prepare_combos
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,6 +40,7 @@ class NvsSubsystemsController < ApplicationController
   # GET /nvs_subsystems/1/edit
   def edit
     @nvs_subsystem = NvsSubsystem.find(params[:id])
+    prepare_combos
   end
 
   # POST /nvs_subsystems
@@ -46,6 +48,16 @@ class NvsSubsystemsController < ApplicationController
   def create
     @nvs_subsystem = NvsSubsystem.new(params[:nvs_subsystem])
     @nvs_subsystem.project_id = session[:project_id]
+
+    binding.pry
+    params['depts_project_ids'].each do |dp|
+        #binding.pry
+        clone_dp = NvsDeptProject.find(dp).dup #get dept_project selected.
+        clone_dp.nvs_subsystem = @nvs_subsystem
+        clone_dp.nvs_dept_id = 0
+        clone_dp.project_id = session[:project_id]
+        clone_dp.save
+    end
 
     respond_to do |format|
       if @nvs_subsystem.save
@@ -62,7 +74,7 @@ class NvsSubsystemsController < ApplicationController
   # PUT /nvs_subsystems/1.json
   def update
     @nvs_subsystem = NvsSubsystem.find(params[:id])
-
+    
     respond_to do |format|
       if @nvs_subsystem.update_attributes(params[:nvs_subsystem])
         format.html { redirect_to @nvs_subsystem, notice: 'Nvs subsystem was successfully updated.' }
@@ -100,6 +112,11 @@ class NvsSubsystemsController < ApplicationController
       @project = Project.find(session[:project_id])
     end
 
+  end
+
+  def prepare_combos
+    #depts_projects with nvs_dept_id = 0 represent the list of projects to add, loaded once when NVS plugin is installed.
+    @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_dept_id => 0).map{|dp| [dp.name, dp.id]}
   end
 
 end

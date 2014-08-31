@@ -1,0 +1,18 @@
+%h1
+  = "Add users to one dept"
+
+= form_tag(users2dept_nvs_depts_path, method: :get) do
+  .fields
+    = select_tag "Departaments" , options_for_select(@depts)
+  %table
+    - @users.each do |user|
+      %tr
+        %td
+          = check_box_tag 'users_selected[]',  user[1].to_s
+        %td
+          = text_field_tag 'users_ids[]',   user[1].to_s
+
+
+
+  .actions
+    = submit_tag 'enviar'

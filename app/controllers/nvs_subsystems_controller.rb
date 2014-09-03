@@ -82,19 +82,14 @@ class NvsSubsystemsController < ApplicationController
     respond_to do |format|
       if @nvs_subsystem.update_attributes(params[:nvs_subsystem])
 
-
-        #Remove relation
+        #Remove relations if any
         dp2remove = @project_related.map{|x| "#{x[1]}"} - params['project_related_ids']
-
-#binding.pry
-          dp2remove.each do |dp|
-            dp = NvsDeptProject.find(dp)
-            dp.nvs_subsystem_id = 0
-            dp.save
-          end
-
-
-#binding.pry
+        dp2remove.each do |dp|
+          dp = NvsDeptProject.find(dp)
+          dp.nvs_subsystem_id = 0
+          dp.save
+        end
+        #Add new relations if any
         unless params['depts_project_ids'].nil?
           params['depts_project_ids'].each do |dp|
               dp = NvsDeptProject.find(dp) #get dept_project selected.

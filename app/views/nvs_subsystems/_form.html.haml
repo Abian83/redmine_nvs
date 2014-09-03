@@ -14,23 +14,22 @@
     = f.text_field :internal_name
 
 
-
-    - if @project_related
-      %br
-      %br
-      %h4
-        = t "Projects Already related:"
-      %table
-        - i = 0
-        %tr
-          - @dept_projects.each do |depts_project|
-            - if i % 10 == 0
-              %tr
-            %td
-              %label
-                = check_box_tag 'depts_project_ids[]',  depts_project[1].to_s
-                = depts_project[0]
-            - i = i+1
+  - if @project_related
+    %br
+    %br
+    %h4
+      = t "Projects Already related:"
+    %table
+      - i = 0
+      %tr
+        - @project_related.each do |project_related|
+          - if i % 10 == 0
+            %tr
+          %td
+            %label
+              = check_box_tag 'project_related_ids[]',  project_related[1].to_s, true
+              = project_related[0]
+          - i = i+1
 
     %br
     %br
@@ -51,7 +50,7 @@
               = depts_project[0]
           - i = i+1
 
-    :javascript        
+    :javascript
       $('#select_all_depts_project_ids').click(function() {
         var c = this.checked;
         $(':checkbox').prop('checked',c);

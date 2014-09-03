@@ -41,6 +41,7 @@ class NvsSubsystemsController < ApplicationController
   def edit
     @nvs_subsystem = NvsSubsystem.find(params[:id])
     prepare_combos
+    get_related_projects
   end
 
   # POST /nvs_subsystems
@@ -48,12 +49,11 @@ class NvsSubsystemsController < ApplicationController
   def create
     @nvs_subsystem = NvsSubsystem.new(params[:nvs_subsystem])
     @nvs_subsystem.project_id = session[:project_id]
-    binding.pry
+
     respond_to do |format|
       if @nvs_subsystem.save
         unless params['depts_project_ids'].nil?
           params['depts_project_ids'].each do |dp|
-            binding.pry
               dp = NvsDeptProject.find(dp) #get dept_project selected.
               dp.nvs_subsystem = @nvs_subsystem
               dp.nvs_dept_id = 0 if dp.nvs_dept_id.nil?
@@ -66,6 +66,7 @@ class NvsSubsystemsController < ApplicationController
         format.json { render json: @nvs_subsystem, status: :created, location: @nvs_subsystem }
       else
         prepare_combos
+        get_related_projects
         format.html { render action: "new" }
         format.json { render json: @nvs_subsystem.errors, status: :unprocessable_entity }
       end
@@ -76,9 +77,34 @@ class NvsSubsystemsController < ApplicationController
   # PUT /nvs_subsystems/1.json
   def update
     @nvs_subsystem = NvsSubsystem.find(params[:id])
+    get_related_projects
 
     respond_to do |format|
       if @nvs_subsystem.update_attributes(params[:nvs_subsystem])
+
+
+        #Remove relation
+        dp2remove = @project_related.map{|x| "#{x[1]}"} - params['project_related_ids']
+
+#binding.pry
+          dp2remove.each do |dp|
+            dp = NvsDeptProject.find(dp)
+            dp.nvs_subsystem_id = 0
+            dp.save
+          end
+
+
+#binding.pry
+        unless params['depts_project_ids'].nil?
+          params['depts_project_ids'].each do |dp|
+              dp = NvsDeptProject.find(dp) #get dept_project selected.
+              dp.nvs_subsystem = @nvs_subsystem
+              dp.nvs_dept_id = 0 if dp.nvs_dept_id.nil?
+              dp.project_id = session[:project_id]
+              dp.save
+          end
+        end
+
         format.html { redirect_to @nvs_subsystem, notice: 'Nvs subsystem was successfully updated.' }
         format.json { head :no_content }
       else
@@ -126,6 +152,10 @@ class NvsSubsystemsController < ApplicationController
   def prepare_combos
     #depts_projects with nvs_dept_id = 0 represent the list of projects to add, loaded once when NVS plugin is installed.
     @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_subsystem_id => 0).map{|dp| [dp.name, dp.id]}
+  end
+
+  def get_related_projects
+    @project_related = NvsDeptProject.where(:project_id => session[:project_id], :nvs_subsystem_id => @nvs_subsystem.id).map{|dp| [dp.name, dp.id]}
   end
 
 end

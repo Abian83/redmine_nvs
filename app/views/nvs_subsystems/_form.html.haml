@@ -31,30 +31,30 @@
               = project_related[0]
           - i = i+1
 
-    %br
-    %br 
-    %h4
-      = t "Projects to relate with:"
-    %table
-      - i = 0
-      %tr
-        = check_box_tag 'select_all_depts_project_ids'
-        = "Select All"
-      %tr
-        - @dept_projects.each do |depts_project|
-          - if i % 10 == 0
-            %tr
-          %td
-            %label
-              = check_box_tag 'depts_project_ids[]',  depts_project[1].to_s
-              = depts_project[0]
-          - i = i+1
+  %br
+  %br
+  %h4
+    = t "Projects to relate with:"
+  %table
+    - i = 0
+    %tr
+      = check_box_tag 'select_all_depts_project_ids'
+      = "Select All"
+    %tr
+      - @dept_projects.each do |depts_project|
+        - if i % 10 == 0
+          %tr
+        %td
+          %label
+            = check_box_tag 'depts_project_ids[]',  depts_project[1].to_s
+            = depts_project[0]
+        - i = i+1
 
-    :javascript
-      $('#select_all_depts_project_ids').click(function() {
-        var c = this.checked;
-        $(':checkbox').prop('checked',c);
-      });
+  :javascript
+    $('#select_all_depts_project_ids').click(function() {
+      var c = this.checked;
+      $(':checkbox').prop('checked',c);
+    });
 
 
   .actions

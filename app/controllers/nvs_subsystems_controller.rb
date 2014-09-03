@@ -1,6 +1,6 @@
 class NvsSubsystemsController < ApplicationController
 
-  before_filter :find_project
+  before_filter :find_project, :prepare_combos
   before_filter :authorize
 
   # GET /nvs_subsystems
@@ -48,21 +48,24 @@ class NvsSubsystemsController < ApplicationController
   def create
     @nvs_subsystem = NvsSubsystem.new(params[:nvs_subsystem])
     @nvs_subsystem.project_id = session[:project_id]
-
-    params['depts_project_ids'].each do |dp|
-        #binding.pry
-        clone_dp = NvsDeptProject.find(dp).dup #get dept_project selected.
-        clone_dp.nvs_subsystem = @nvs_subsystem
-        clone_dp.nvs_dept_id = 0
-        clone_dp.project_id = session[:project_id]
-        clone_dp.save
-    end
-
+    binding.pry
     respond_to do |format|
       if @nvs_subsystem.save
+        unless params['depts_project_ids'].nil?
+          params['depts_project_ids'].each do |dp|
+            binding.pry
+              dp = NvsDeptProject.find(dp) #get dept_project selected.
+              dp.nvs_subsystem = @nvs_subsystem
+              dp.nvs_dept_id = 0 if dp.nvs_dept_id.nil?
+              dp.project_id = session[:project_id]
+              dp.save
+          end
+        end
+
         format.html { redirect_to @nvs_subsystem, notice: 'Nvs subsystem was successfully created.' }
         format.json { render json: @nvs_subsystem, status: :created, location: @nvs_subsystem }
       else
+        prepare_combos
         format.html { render action: "new" }
         format.json { render json: @nvs_subsystem.errors, status: :unprocessable_entity }
       end
@@ -89,6 +92,14 @@ class NvsSubsystemsController < ApplicationController
   # DELETE /nvs_subsystems/1.json
   def destroy
     @nvs_subsystem = NvsSubsystem.find(params[:id])
+
+    #Clean the relation if exist!
+    dp = NvsDeptProject.where(:nvs_subsystem_id => @nvs_subsystem.id).first
+    unless dp.nil?
+      dp.nvs_subsystem_id = 0
+      dp.save
+    end
+
     @nvs_subsystem.destroy
 
     respond_to do |format|
@@ -102,7 +113,6 @@ class NvsSubsystemsController < ApplicationController
 
   def find_project
     # @project variable must be set before calling the authorize filter
-    #binding.pry
 
     if params[:project_id]
       @project = Project.find(params[:project_id])
@@ -115,7 +125,7 @@ class NvsSubsystemsController < ApplicationController
 
   def prepare_combos
     #depts_projects with nvs_dept_id = 0 represent the list of projects to add, loaded once when NVS plugin is installed.
-    @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_dept_id => 0).map{|dp| [dp.name, dp.id]}
+    @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_subsystem_id => 0).map{|dp| [dp.name, dp.id]}
   end
 
 end

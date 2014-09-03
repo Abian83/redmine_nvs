@@ -1,6 +1,6 @@
 class NvsDeptsController < ApplicationController
 
-  before_filter :find_project
+  before_filter :find_project, :prepare_combos
   before_filter :authorize
 
   # GET /nvs_depts
@@ -47,19 +47,18 @@ class NvsDeptsController < ApplicationController
     @nvs_dept = NvsDept.new(params[:nvs_dept])
     @nvs_dept.project_id = session[:project_id]
 
-
-    params['depts_project_ids'].each do |dp|
-        #binding.pry
-        clone_dp = NvsDeptProject.find(dp).dup #get dept_project selected.
-        clone_dp.nvs_dept = @nvs_dept
-        clone_dp.project_id = session[:project_id]
-        clone_dp.save
-    end
-
-
-
     respond_to do |format|
       if @nvs_dept.save
+        unless params['depts_project_ids'].nil?
+          params['depts_project_ids'].each do |dp|
+              dp = NvsDeptProject.find(dp) #get dept_project selected.
+              dp.nvs_dept = @nvs_dept
+              dp.project_id = session[:project_id]
+              dp.nvs_subsystem_id = 0 if dp.nvs_subsystem_id.nil?
+              dp.save
+          end
+        end
+
         format.html { redirect_to @nvs_dept, notice: 'Nvs dept was successfully created.' }
         format.json { render json: @nvs_dept, status: :created, location: @nvs_dept }
       else
@@ -89,6 +88,14 @@ class NvsDeptsController < ApplicationController
   # DELETE /nvs_depts/1.json
   def destroy
     @nvs_dept = NvsDept.find(params[:id])
+
+    #Clean the relation if exist!
+    dp = NvsDeptProject.where(:nvs_subsystem_id => @nvs_dept.id).first
+    unless dp.nil?
+      dp.nvs_dept_id = 0
+      dp.save
+    end
+
     @nvs_dept.destroy
 
     respond_to do |format|

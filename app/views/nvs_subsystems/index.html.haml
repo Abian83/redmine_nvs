@@ -11,15 +11,12 @@
       %th
         = t 'Internal Name'
       %th
-        = t 'Project'
-      %th
       %th
 
     - @nvs_subsystems.each do |nvs_subsystem|
       %tr{:class => "#{cycle('odd', 'even')}"}
         %td= link_to nvs_subsystem.name, nvs_subsystem
         %td= nvs_subsystem.internal_name
-        %td= nvs_subsystem.project.name unless nvs_subsystem.project.nil?
         %td= link_to image_tag('edit.png'), edit_nvs_subsystem_path(nvs_subsystem)
         %td= link_to image_tag('delete.png'), nvs_subsystem, :method => :delete, :data => { :confirm => (t 'Are you sure') }
 

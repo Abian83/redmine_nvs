@@ -10,6 +10,7 @@ class NvsDept < ActiveRecord::Base
   validates :project_id, presence: true
 
   belongs_to :project
-  has_many   :nvs_depts_projects
+
+  validates_uniqueness_of :name, :scope => [:name]
 
 end

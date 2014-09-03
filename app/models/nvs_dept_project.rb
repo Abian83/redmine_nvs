@@ -8,6 +8,7 @@ class NvsDeptProject < ActiveRecord::Base
      too_long: "%{count} characters is the maximum allowed" }, :presence => true
 
   validates :project_id, presence: true
+  validates_uniqueness_of :name, :scope => :nvs_subsystem_id
 
   belongs_to :project
   belongs_to :nvs_subsystem

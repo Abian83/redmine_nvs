@@ -12,6 +12,20 @@
   %b Project:
   = @nvs_subsystem.project_id
 
+- if @project_related.any?
+  %h4
+    = t "Projects related"
+  %table
+    - i = 0
+    %tr
+      - @project_related.each do |depts_project|
+        - if i % 10 == 0
+          %tr
+        %td
+          %label
+            = depts_project[0]
+        - i = i+1
+
 = link_to (t 'Edit'), edit_nvs_subsystem_path(@nvs_subsystem)
 \|
 = link_to (t 'Back') , nvs_subsystems_path

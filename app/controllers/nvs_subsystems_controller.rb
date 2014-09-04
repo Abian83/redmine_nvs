@@ -2,12 +2,12 @@ class NvsSubsystemsController < ApplicationController
 
   before_filter :find_project, :prepare_combos
   before_filter :authorize
+  before_filter :get_related_projects , :except => [:index, :new, :destroy, :create]
 
   # GET /nvs_subsystems
   # GET /nvs_subsystems.json
   def index
     @nvs_subsystems = NvsSubsystem.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nvs_subsystems }
@@ -18,7 +18,6 @@ class NvsSubsystemsController < ApplicationController
   # GET /nvs_subsystems/1.json
   def show
     @nvs_subsystem = NvsSubsystem.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @nvs_subsystem }
@@ -41,7 +40,6 @@ class NvsSubsystemsController < ApplicationController
   def edit
     @nvs_subsystem = NvsSubsystem.find(params[:id])
     prepare_combos
-    get_related_projects
   end
 
   # POST /nvs_subsystems
@@ -77,13 +75,13 @@ class NvsSubsystemsController < ApplicationController
   # PUT /nvs_subsystems/1.json
   def update
     @nvs_subsystem = NvsSubsystem.find(params[:id])
-    get_related_projects
 
     respond_to do |format|
       if @nvs_subsystem.update_attributes(params[:nvs_subsystem])
 
         #Remove relations if any
-        dp2remove = @project_related.map{|x| "#{x[1]}"} - params['project_related_ids']
+        #binding.pry
+        dp2remove =  @project_related.map{|x| "#{x[1]}"} - params['project_related_ids'].to_a
         dp2remove.each do |dp|
           dp = NvsDeptProject.find(dp)
           dp.nvs_subsystem_id = 0
@@ -115,10 +113,12 @@ class NvsSubsystemsController < ApplicationController
     @nvs_subsystem = NvsSubsystem.find(params[:id])
 
     #Clean the relation if exist!
-    dp = NvsDeptProject.where(:nvs_subsystem_id => @nvs_subsystem.id).first
-    unless dp.nil?
-      dp.nvs_subsystem_id = 0
-      dp.save
+    dps = NvsDeptProject.where(:nvs_subsystem_id => params[:id]).all
+    unless dps.nil?
+      dps.each do |dp|
+        dp.nvs_subsystem_id = 0
+        dp.save
+      end
     end
 
     @nvs_subsystem.destroy
@@ -150,7 +150,7 @@ class NvsSubsystemsController < ApplicationController
   end
 
   def get_related_projects
-    @project_related = NvsDeptProject.where(:project_id => session[:project_id], :nvs_subsystem_id => @nvs_subsystem.id).map{|dp| [dp.name, dp.id]}
+    @project_related = NvsDeptProject.where(:project_id => session[:project_id], :nvs_subsystem_id => params[:id]).map{|dp| [dp.name, dp.id]}
   end
 
 end

@@ -1,0 +1,29 @@
+= render partial: 'layouts/menu'
+
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_goal_type.name
+%p
+  %b Description:
+  = @nvs_goal_type.description
+%p
+  %b Sql string:
+  = @nvs_goal_type.sql_connect
+%p
+  %b Sql access:
+  = @nvs_goal_type.sql_access
+%p
+  %b Created on:
+  = @nvs_goal_type.created_on
+%p
+  %b Created by:
+  = @nvs_goal_type.created_by
+%p
+  %b Free goal:
+  = @nvs_goal_type.free_goal
+
+= link_to 'Edit', edit_nvs_goal_type_path(@nvs_goal_type)
+\|
+= link_to 'Back', nvs_goal_types_path

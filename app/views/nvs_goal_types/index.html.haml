@@ -1,0 +1,40 @@
+= render partial: 'layouts/menu'
+
+%h1
+  = t "Goal Types"
+
+.autoscroll
+  %table.list
+    %tr
+      %th
+        = t "Name"
+      %th
+        = t "Description"
+      %th
+        = t "Sql connect"
+      %th
+        = t "Sql access"
+      %th
+        = t "Created on"
+      %th
+        = t "Created by"
+      %th
+        = t "Free goal"
+      %th
+      %th
+
+    - @nvs_goal_types.each do |nvs_goal_type|
+      %tr
+        %td= nvs_goal_type.name
+        %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal_type.description
+        %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal_type.sql_connect
+        %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal_type.sql_access
+        %td= nvs_goal_type.created_on
+        %td= nvs_goal_type.created_by
+        %td= nvs_goal_type.free_goal
+        %td= link_to image_tag('edit.png'), edit_nvs_goal_type_path(nvs_goal_type)
+        %td= link_to image_tag('delete.png'), nvs_goal_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+= link_to (t 'New goal type'), new_nvs_goal_type_path

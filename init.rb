@@ -28,6 +28,12 @@ Redmine::Plugin.register :redmine_nvs do
     permission :view_nvs_dept_users, :nvs_dept_users => [:index, :show]
     permission :edit_nvs_dept_users, :nvs_dept_users => [:edit,:new,:create,:destroy,:update]
 
+    permission :view_nvs_goal_types, :nvs_goal_types => [:index, :show]
+    permission :edit_nvs_goal_types, :nvs_goal_types => [:edit,:new,:create,:destroy,:update]
+
+    permission :view_nvs_goals, :nvs_goals => [:index, :show]
+    permission :edit_nvs_goals, :nvs_goals => [:edit,:new,:create,:destroy,:update]
+
   end
 
 end

@@ -1,12 +1,13 @@
-# English strings go here for Rails i18n
+# Spanish strings go here for Rails i18n
 es:
 
   Subsystem List:         Lista de Subsistemas
   Internal Name:          Nombre Interno
   New Subsystem:          Nuevo Subsistema
-  Are you sure:           Estas seguro
+  Are you sure?:           ¿Estas seguro?
   Name:                   Nombre
-  Project:                Projecto
+  Project:                Proyecto
+  Projects:               Proyectos
   Save:                   Guardar
   Project Id:             Id de Proyecto
   Home:                   Principal
@@ -20,3 +21,21 @@ es:
   Departament of Projects:     Proyectos de Departamanto
   Save:                   Guardar
   Departaments:           Departamentos
+  Projects Already related:       Proyectos ya relacionados
+  Projects to relate with:        Proyectos a relacionar con
+  Edit Subsystem:                 Editar Subsystema
+  Goals:                          Objetivos
+  Description:                    Descripción
+  Created on:         Fecha de creación
+  Created by:         Creado por
+  Goal type:          Tipo de objetivo
+  Goal Types:         Tipos de objetivos
+  Ext goal reference:   Ref. ext. de Objetivo
+  New Goal:             Nuevo Objetivo
+  Users:                Usuarios
+  Edit Goal:            Editar Objetivo
+  New goal type:        Nuevo tipo de objetivo
+  Edit goal type:       Editar tipo de objetivo
+  sql connect:          sql connect
+  sql access:           sql access
+  Free goal:            Free goal

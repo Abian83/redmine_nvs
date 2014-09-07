@@ -12,5 +12,15 @@
   .field
     = f.label :internal_name
     = f.text_field :internal_name
+
+  .field
+    = f.label  :nvs_subsystem_id
+    = f.select :nvs_subsystem_id , @nvs_subsystem_ids
+
+  .field
+    = f.label  :nvs_dept_id
+    = f.select :nvs_dept_id , @nvs_dept_ids
+
+
   .actions
     = f.submit t 'Save'

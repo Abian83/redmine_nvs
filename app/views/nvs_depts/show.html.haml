@@ -8,9 +8,21 @@
 %p
   %b Email:
   = @nvs_dept.email
-%p
-  %b Project:
-  = @nvs_dept.project_id
+%br
+  
+- if @project_related.any?
+  %h4
+    = t "Projects related"
+  %table
+    - i = 0
+    %tr
+      - @project_related.each do |depts_project|
+        - if i % 10 == 0
+          %tr
+        %td
+          %label
+            = depts_project[0]
+        - i = i+1
 
 = link_to (t 'Edit'), edit_nvs_dept_path(@nvs_dept)
 \|

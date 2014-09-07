@@ -361,4 +361,11 @@
     right: 20px;
     top: 26px;
   }
+
+  #fixcol td {
+    word-wrap: break-word;
+    max-width: 200;
+  }
+
+
 }

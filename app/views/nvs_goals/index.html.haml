@@ -1,0 +1,35 @@
+= render partial: 'layouts/menu'
+
+%h1
+  = t "Goals"
+
+.autoscroll
+  %table.list
+    %tr
+      %th
+        = t "Ext goal reference"
+      %th
+        = t "Description"
+      %th
+        = t "Goal type"
+      %th
+        = t "Created on"
+      %th
+        = t "Created by"
+      %th
+      %th
+      %th
+
+    - @nvs_goals.each do |nvs_goal|
+      %tr
+        %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal.ext_goal_reference
+        %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal.description
+        %td= nvs_goal.nvs_goal_type.name unless nvs_goal.nvs_goal_type.nil?
+        %td= nvs_goal.created_on
+        %td= nvs_goal.created_by.name unless nvs_goal.created_by.nil?
+        %td= link_to image_tag('edit.png'), edit_nvs_goal_path(nvs_goal)
+        %td= link_to image_tag('delete.png'), nvs_goal, :method => :delete, :data => { :confirm => (t 'Are you sure?') }
+
+  %br
+
+= link_to (t 'New Goal'), new_nvs_goal_path

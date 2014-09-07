@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+ #fixcol td {
+   word-wrap: break-word;
+   max-width: 200;
+ }

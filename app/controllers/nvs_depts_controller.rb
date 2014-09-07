@@ -151,7 +151,6 @@ class NvsDeptsController < ApplicationController
   end
 
   def prepare_combos
-    #binding.pry
     #depts_projects with nvs_dept_id = 0 represent the list of projects to add, loaded once when NVS plugin is installed.
     @dept_projects = NvsDeptProject.where(:project_id => session[:project_id], :nvs_dept_id => 0).map{|dp| [dp.name, dp.id]}
   end

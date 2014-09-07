@@ -1,0 +1,10 @@
+= render partial: 'layouts/menu'
+
+%h1
+  = t "Edit goal type"
+
+= render 'form'
+
+%br
+= link_to (t 'Show'), @nvs_goal_type
+= link_to (t 'Back'), nvs_goal_types_path

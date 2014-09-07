@@ -7,7 +7,6 @@
       %a{:href => nvs_subsystems_path( :project_id => session[:project_id] )}
         %span
           = t "Home"
-
     %li.has-sub
       %a{:href => "#"}
         %span
@@ -20,7 +19,7 @@
     %li.has-sub
       %a{:href => "#"}
         %span
-          = t "Departament of Projects"
+          = t "Projects"
         %ul
           %li
             = link_to (t 'Index'), nvs_dept_projects_path( :project_id => session[:project_id] )
@@ -37,6 +36,25 @@
             = link_to (t 'New'),  new_nvs_dept_path
           %li
             = link_to (t 'Add users to dept'),  users2dept_nvs_depts_path
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Goals"
+        %ul
+          %li
+            = link_to (t 'Index'), nvs_goals_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_goal_path
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Goal Types"
+        %ul
+          %li
+            = link_to (t 'Index'), nvs_goal_types_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'New'),  new_nvs_goal_type_path
+
     %li.has-sub
       %a{:href => "#"}
         %span

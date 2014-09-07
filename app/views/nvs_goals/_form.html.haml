@@ -1,0 +1,30 @@
+= form_for @nvs_goal do |f|
+  - if @nvs_goal.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_goal.errors.count, "error")} prohibited this nvs_goal from being saved:"
+      %ul
+        - @nvs_goal.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label (t "Ext goal reference")
+    %br
+    = f.text_area :ext_goal_reference , :size => "100x3"
+  .field
+    = f.label :description
+    %br
+    = f.text_area :description, :size => "100x3"
+  .field
+    = f.label (t "Goal type")
+    %br
+    = f.select :nvs_goal_type_id, @nvs_goal_types
+  .field
+    = f.label (t "Created on")
+    %br
+    = f.datetime_select :created_on
+  .field
+    = f.label (t "Created by")
+    = f.select :created_by_id, @users
+  .actions
+    %br
+    = f.submit (t 'Save')

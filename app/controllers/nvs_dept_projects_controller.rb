@@ -40,7 +40,9 @@ class NvsDeptProjectsController < ApplicationController
 
   # GET /nvs_dept_projects/1/edit
   def edit
-    @nvs_dept_project = NvsDeptProject.find(params[:id])
+    @nvs_dept_project  = NvsDeptProject.find(params[:id])
+    @nvs_subsystem_ids = NvsSubsystem.all.map{|x| [x.name, x.id]}.append(["",0])
+    @nvs_dept_ids      = NvsDept.all.map{|x| [x.name, x.id]}.append(["",0])
   end
 
   # POST /nvs_dept_projects
@@ -90,7 +92,7 @@ class NvsDeptProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
 
   private
 

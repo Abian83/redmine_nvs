@@ -1,0 +1,26 @@
+= render partial: 'layouts/menu'
+
+%p#notice= notice
+
+%p
+  %b Ext goal reference:
+  = @nvs_goal.ext_goal_reference
+%p
+  %b Description:
+  = @nvs_goal.description
+%p
+  %b Nvs goal type:
+  = @nvs_goal.nvs_goal_type_id
+%p
+  %b Created on:
+  = @nvs_goal.created_on
+%p
+  %b Created by:
+  = @nvs_goal.created_by
+%p
+  %b Project:
+  = @nvs_goal.project_id
+
+= link_to 'Edit', edit_nvs_goal_path(@nvs_goal)
+\|
+= link_to 'Back', nvs_goals_path

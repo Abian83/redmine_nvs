@@ -1,0 +1,39 @@
+= form_for @nvs_goal_type do |f|
+  - if @nvs_goal_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_goal_type.errors.count, "error")} prohibited this nvs_goal_type from being saved:"
+      %ul
+        - @nvs_goal_type.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label (t "Name")
+    %br
+    = f.text_field :name
+  .field
+    = f.label (t "Description")
+    %br
+    = f.text_field :description
+  .field
+    = f.label (t "sql connect")
+    %br
+    = f.text_area :sql_connect, :size => "100x3"
+  .field
+    = f.label (t "sql access")
+    %br
+    = f.text_area :sql_access, :size => "100x3"
+  .field
+    = f.label (t "Created on")
+    = f.datetime_select :created_on
+    = calendar_for (:created_on)
+  .field
+    = f.label (t "Created by")
+    %br
+    = f.number_field :created_by
+  .field
+    = f.label (t "Free goal")
+    %br
+    = f.number_field :free_goal
+  %br
+  .actions
+    = f.submit (t 'Save')

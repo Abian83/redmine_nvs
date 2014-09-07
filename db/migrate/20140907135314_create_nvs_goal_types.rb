@@ -6,7 +6,7 @@ class CreateNvsGoalTypes < ActiveRecord::Migration
       t.string :sql_connect
       t.string :sql_access
       t.datetime :created_on
-      t.integer :created_by
+      t.integer :created_by_id
       t.boolean :free_goal
 
       t.timestamps

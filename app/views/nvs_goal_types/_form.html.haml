@@ -29,7 +29,7 @@
   .field
     = f.label (t "Created by")
     %br
-    = f.number_field :created_by
+    = f.select :created_by_id, @users
   .field
     = f.label (t "Free goal")
     %br

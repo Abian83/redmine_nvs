@@ -63,7 +63,6 @@ class NvsGoalsController < ApplicationController
   # PUT /nvs_goals/1.json
   def update
     @nvs_goal = NvsGoal.find(params[:id])
-    binding.pry
     respond_to do |format|
       if @nvs_goal.update_attributes(params[:nvs_goal])
         format.html { redirect_to @nvs_goal, notice: 'Nvs goal was successfully updated.' }

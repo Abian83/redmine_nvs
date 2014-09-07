@@ -37,7 +37,7 @@
         %td= nvs_dept_user.temp_end_date
         //%td= link_to 'Show', nvs_dept_user
         %td= link_to image_tag('edit.png'), edit_nvs_dept_user_path(nvs_dept_user)
-        %td= link_to image_tag('delete.png'), nvs_dept_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to image_tag('delete.png'), nvs_dept_user, :method => :delete, :data => { :confirm => (t 'Are you sure?') }
 
   %br
 

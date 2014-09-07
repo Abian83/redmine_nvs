@@ -2,6 +2,7 @@ class NvsGoalTypesController < ApplicationController
 
   before_filter :find_project
   before_filter :authorize
+  before_filter :find_user , :expect => [:index,:show, :detroy]
 
   # GET /nvs_goal_types
   # GET /nvs_goal_types.json
@@ -44,7 +45,6 @@ class NvsGoalTypesController < ApplicationController
   # POST /nvs_goal_types
   # POST /nvs_goal_types.json
   def create
-    binding.pry
     @nvs_goal_type = NvsGoalType.new(params[:nvs_goal_type])
 
     respond_to do |format|
@@ -96,6 +96,10 @@ class NvsGoalTypesController < ApplicationController
     else
       @project = Project.find(session[:project_id])
     end
+  end
+
+  def find_user
+    @users = User.all.map{|x| [x.name, x.id]}
   end
 
 

@@ -18,9 +18,9 @@
   .field
     = f.label :temp_authorization_level
     = f.select :temp_authorization_level, @tmp_authLevels
-  //.field
-  //= f.label :project_id
-  //= f.number_field :project_id
+  .field
+  = f.label :nvs_dept_id
+  = f.select :nvs_dept_id, @nvs_dept_ids
   .field
     = f.label :temp_start_date
     = f.datetime_select :temp_start_date

@@ -39,3 +39,5 @@ es:
   sql connect:          sql connect
   sql access:           sql access
   Free goal:            Free goal
+  True:                 Verdadero
+  False:                Falso

@@ -1,0 +1,33 @@
+%h1 Listing nvs_packs
+
+%table
+  %tr
+    %th Name
+    %th Status
+    %th X
+    %th X type
+    %th Nvs env
+    %th Emergencies
+    %th Audit
+    %th Project
+    %th
+    %th
+    %th
+
+  - @nvs_packs.each do |nvs_pack|
+    %tr
+      %td= nvs_pack.name
+      %td= nvs_pack.status
+      %td= nvs_pack.x_id
+      %td= nvs_pack.x_type
+      %td= nvs_pack.nvs_env_id
+      %td= nvs_pack.emergencies
+      %td= nvs_pack.audit
+      %td= nvs_pack.project_id
+      %td= link_to 'Show', nvs_pack
+      %td= link_to 'Edit', edit_nvs_pack_path(nvs_pack)
+      %td= link_to 'Destroy', nvs_pack, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Nvs pack', new_nvs_pack_path

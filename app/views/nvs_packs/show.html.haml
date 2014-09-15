@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_pack.name
+%p
+  %b Status:
+  = @nvs_pack.status
+%p
+  %b X:
+  = @nvs_pack.x_id
+%p
+  %b X type:
+  = @nvs_pack.x_type
+%p
+  %b Nvs env:
+  = @nvs_pack.nvs_env_id
+%p
+  %b Emergencies:
+  = @nvs_pack.emergencies
+%p
+  %b Audit:
+  = @nvs_pack.audit
+%p
+  %b Project:
+  = @nvs_pack.project_id
+
+= link_to 'Edit', edit_nvs_pack_path(@nvs_pack)
+\|
+= link_to 'Back', nvs_packs_path

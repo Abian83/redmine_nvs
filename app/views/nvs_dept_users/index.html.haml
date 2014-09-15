@@ -15,8 +15,6 @@
       %th
         = t 'Temp authorization level'
       %th
-        = t 'Project'
-      %th
         = t 'Temp start date'
       %th
         = t 'Temp end date'
@@ -29,10 +27,8 @@
         %td= nvs_dept_user.user.name unless nvs_dept_user.user.blank?
         %td
           = ((nvs_dept_user.nvs_dept_id.blank?) ? "Unassigned" : nvs_dept_user.nvs_dept.name)
-        %td
-        %td= nvs_dept_user.authorization_level
-        %td= nvs_dept_user.temp_authorization_level
-        %td= nvs_dept_user.project_id
+        %td= NvsDeptUser.levels.key(nvs_dept_user.authorization_level).to_s
+        %td= NvsDeptUser.temp_levels.key(nvs_dept_user.temp_authorization_level).to_s
         %td= nvs_dept_user.temp_start_date
         %td= nvs_dept_user.temp_end_date
         //%td= link_to 'Show', nvs_dept_user

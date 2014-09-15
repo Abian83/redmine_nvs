@@ -46,13 +46,20 @@ class NvsDeptUsersController < ApplicationController
   # POST /nvs_dept_users.json
   def create
     @nvs_dept_user = NvsDeptUser.new(params[:nvs_dept_user])
-    respond_to do |format|
-      if @nvs_dept_user.save
-        format.html { redirect_to @nvs_dept_user, notice: 'Nvs dept user was successfully created.' }
-        format.json { render json: @nvs_dept_user, status: :created, location: @nvs_dept_user }
-      else
+    if @nvs_dept_user.temp_start_date < @nvs_dept_user.temp_end_date
+      respond_to do |format|
+        if @nvs_dept_user.save
+          format.html { redirect_to @nvs_dept_user, notice: 'Nvs dept user was successfully created.' }
+          format.json { render json: @nvs_dept_user, status: :created, location: @nvs_dept_user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @nvs_dept_user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        @nvs_dept_user.errors.add(:temp_start_date , 'Start date must be < than end date')
         format.html { render action: "new" }
-        format.json { render json: @nvs_dept_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -100,7 +107,12 @@ class NvsDeptUsersController < ApplicationController
   end
 
   def prepare_combos
-    @users = User.all.map{|x| [x.name,x.id]}
+    #Users already related to a departaments
+    assigned_users = NvsDeptUser.all.map{|x| x.user_id}
+    all_users      = User.all.map{|x| x.id}
+
+    @users = User.where('id in (?)',all_users - assigned_users ).map{|x| [x.name,x.id]}
+
     @authLevels = NvsDeptUser.levels.map{|x| [x[0].to_s,x[1].to_s]}
     @tmp_authLevels = NvsDeptUser.temp_levels.map{|x| [x[0].to_s,x[1].to_s]}
   end

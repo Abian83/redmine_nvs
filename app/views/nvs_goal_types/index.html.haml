@@ -31,7 +31,11 @@
         %td{:style => "word-wrap:break-word; max-width:200px;"}= nvs_goal_type.sql_access
         %td= nvs_goal_type.created_on
         %td= nvs_goal_type.created_by
-        %td= nvs_goal_type.free_goal
+        %td
+          - if nvs_goal_type.free_goal > 0
+            = t "True"
+          - else
+            = t "False"
         %td= link_to image_tag('edit.png'), edit_nvs_goal_type_path(nvs_goal_type)
         %td= link_to image_tag('delete.png'), nvs_goal_type, :method => :delete, :data => { :confirm => (t 'Are you sure?') }
 

@@ -18,13 +18,6 @@
     = f.label (t "Goal type")
     %br
     = f.select :nvs_goal_type_id, @nvs_goal_types
-  .field
-    = f.label (t "Created on")
-    %br
-    = f.datetime_select :created_on
-  .field
-    = f.label (t "Created by")
-    = f.select :created_by_id, @users
   .actions
     %br
     = f.submit (t 'Save')

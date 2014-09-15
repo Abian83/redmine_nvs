@@ -23,17 +23,9 @@
     %br
     = f.text_area :sql_access, :size => "100x3"
   .field
-    = f.label (t "Created on")
-    = f.datetime_select :created_on
-    = calendar_for (:created_on)
-  .field
-    = f.label (t "Created by")
-    %br
-    = f.select :created_by_id, @users
-  .field
     = f.label (t "Free goal")
     %br
-    = f.number_field :free_goal
+    = f.select :free_goal , [[(t 'True'),1],[(t 'False'),0]]
   %br
   .actions
     = f.submit (t 'Save')

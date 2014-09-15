@@ -30,7 +30,6 @@ class NvsGoalTypesController < ApplicationController
   # GET /nvs_goal_types/new.json
   def new
     @nvs_goal_type = NvsGoalType.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @nvs_goal_type }
@@ -46,7 +45,7 @@ class NvsGoalTypesController < ApplicationController
   # POST /nvs_goal_types.json
   def create
     @nvs_goal_type = NvsGoalType.new(params[:nvs_goal_type])
-
+    @nvs_goal_type.created_by = User.current
     respond_to do |format|
       if @nvs_goal_type.save
         format.html { redirect_to @nvs_goal_type, notice: 'Nvs goal type was successfully created.' }

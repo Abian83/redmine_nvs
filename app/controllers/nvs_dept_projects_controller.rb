@@ -2,6 +2,7 @@ class NvsDeptProjectsController < ApplicationController
 
   before_filter :find_project
   before_filter :authorize
+  before_filter :get_subsystems_and_depts , :only => [:new,:edit,:update]
 
   # GET /nvs_dept_projects
   # GET /nvs_dept_projects.json
@@ -29,9 +30,6 @@ class NvsDeptProjectsController < ApplicationController
   # GET /nvs_dept_projects/new.json
   def new
     @nvs_dept_project = NvsDeptProject.new
-
-    prepare_combos
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @nvs_dept_project }
@@ -41,8 +39,6 @@ class NvsDeptProjectsController < ApplicationController
   # GET /nvs_dept_projects/1/edit
   def edit
     @nvs_dept_project  = NvsDeptProject.find(params[:id])
-    @nvs_subsystem_ids = NvsSubsystem.all.map{|x| [x.name, x.id]}.append(["",0])
-    @nvs_dept_ids      = NvsDept.all.map{|x| [x.name, x.id]}.append(["",0])
   end
 
   # POST /nvs_dept_projects
@@ -107,9 +103,16 @@ class NvsDeptProjectsController < ApplicationController
   end
 
 
-  def prepare_combos
+  def get_subsystems_and_depts
+    #sub_ids  = NvsDeptProject.all.group_by{|x| x.nvs_subsystem_id}.map{|x| x[0]}
+    #dept_ids = NvsDeptProject.all.group_by{|x| x.nvs_dept_id}.map{|x| x[0]}
 
+    #Only add subsystem or departments without relation.
+    #@nvs_subsystem_ids = NvsSubsystem.where('id not in (?)' , sub_ids).map{|x| x.id}.append(["",0])
+    #@nvs_dept_ids      = NvsDept.where('id not in (?)' , dept_ids).map{|x| x.id}.append(["",0])
 
+    @nvs_subsystem_ids = NvsSubsystem.all.map{|x| [x.name,x.id]}.append(["",0])
+    @nvs_dept_ids      = NvsDept.all.map{|x| [x.name,x.id]}.append(["",0])
   end
 
 

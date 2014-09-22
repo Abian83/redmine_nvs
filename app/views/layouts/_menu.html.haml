@@ -10,57 +10,22 @@
     %li.has-sub
       %a{:href => "#"}
         %span
-          = t "Subsystems"
+          = t "Configuration"
         %ul
           %li
-            = link_to (t 'Index'), nvs_subsystems_path( :project_id => session[:project_id] )
+            = link_to (t 'Subsystems'), nvs_subsystems_path( :project_id => session[:project_id] )
           %li
-            = link_to (t 'New'),  new_nvs_subsystem_path
-    %li.has-sub
-      %a{:href => "#"}
-        %span
-          = t "Projects"
-        %ul
+            = link_to (t 'Projects'), nvs_dept_projects_path( :project_id => session[:project_id] )
+          %li.has-sub
+            = link_to (t 'Departaments'), nvs_depts_path( :project_id => session[:project_id] )
+            %ul
+              %li
+                = link_to (t 'Index'), nvs_depts_path( :project_id => session[:project_id] )
+              %li
+                = link_to (t 'Add users to dept'),  users2dept_nvs_depts_path
           %li
-            = link_to (t 'Index'), nvs_dept_projects_path( :project_id => session[:project_id] )
+            = link_to (t 'Goals'), nvs_goals_path( :project_id => session[:project_id] )
           %li
-            = link_to (t 'New'),  new_nvs_dept_project_path
-    %li.has-sub
-      %a{:href => "#"}
-        %span
-          = t "Departaments"
-        %ul
+            = link_to (t 'Goal Types'), nvs_goal_types_path( :project_id => session[:project_id] )
           %li
-            = link_to (t 'Index'), nvs_depts_path( :project_id => session[:project_id] )
-          %li
-            = link_to (t 'New'),  new_nvs_dept_path
-          %li
-            = link_to (t 'Add users to dept'),  users2dept_nvs_depts_path
-    %li.has-sub
-      %a{:href => "#"}
-        %span
-          = t "Goals"
-        %ul
-          %li
-            = link_to (t 'Index'), nvs_goals_path( :project_id => session[:project_id] )
-          %li
-            = link_to (t 'New'),  new_nvs_goal_path
-    %li.has-sub
-      %a{:href => "#"}
-        %span
-          = t "Goal Types"
-        %ul
-          %li
-            = link_to (t 'Index'), nvs_goal_types_path( :project_id => session[:project_id] )
-          %li
-            = link_to (t 'New'),  new_nvs_goal_type_path
-
-    %li.has-sub
-      %a{:href => "#"}
-        %span
-          = t "Users"
-        %ul
-          %li
-            = link_to (t 'Index'), nvs_dept_users_path( :project_id => session[:project_id] )
-          %li
-            = link_to (t 'New'),  new_nvs_dept_user_path
+            = link_to (t 'Users'), nvs_dept_users_path( :project_id => session[:project_id] )                                  

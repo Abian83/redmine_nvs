@@ -1,5 +1,6 @@
 class CreateNvsPacks < ActiveRecord::Migration
-  def change
+
+    def change
 
       t.string :name, :limit => 30
       t.string :description, :default => "", :null => false
@@ -74,5 +75,5 @@ class CreateNvsPacks < ActiveRecord::Migration
 
 
 
-  end
+  
 end

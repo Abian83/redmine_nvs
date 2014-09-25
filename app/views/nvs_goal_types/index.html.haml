@@ -32,7 +32,7 @@
         %td= nvs_goal_type.created_on
         %td= nvs_goal_type.created_by
         %td
-          - if nvs_goal_type.free_goal > 0
+          - if nvs_goal_type.free_goal == true
             = t "True"
           - else
             = t "False"

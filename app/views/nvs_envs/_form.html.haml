@@ -1,0 +1,41 @@
+= form_for @nvs_env do |f|
+  - if @nvs_env.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_env.errors.count, "error")} prohibited this nvs_env from being saved:"
+      %ul
+        - @nvs_env.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :mayor_rle
+    = f.number_field :mayor_rle
+  .field
+    = f.label :minor_rle
+    = f.number_field :minor_rle
+  .field
+    = f.label :sequence
+    = f.number_field :sequence
+  .field
+    = f.label :type_id
+    = f.select :type_id , @types
+  .field
+    = f.label :repositories
+    %br
+    = f.text_area :repositories, :size => "100x5"
+  .field
+    = f.label :runtime
+    %br
+    = f.text_area :runtime, :size => "100x5"
+  .field
+    = f.label :subsystems
+    %br
+    = f.text_area :subsystems, :size => "100x5"
+
+  .actions
+    = f.submit 'Save'

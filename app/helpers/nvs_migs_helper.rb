@@ -1,0 +1,2 @@
+module NvsMigsHelper
+end

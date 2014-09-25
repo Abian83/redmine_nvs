@@ -28,4 +28,8 @@
           %li
             = link_to (t 'Goal Types'), nvs_goal_types_path( :project_id => session[:project_id] )
           %li
-            = link_to (t 'Users'), nvs_dept_users_path( :project_id => session[:project_id] )                                  
+            = link_to (t 'Users'), nvs_dept_users_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'Environment'), nvs_envs_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'Migration'), nvs_migs_path( :project_id => session[:project_id] )                                  

@@ -1,0 +1,58 @@
+= render partial: 'layouts/menu'
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_env.name
+%p
+  %b Name:
+  = @nvs_env.name
+%p
+  %b Mayor rle:
+  = @nvs_env.mayor_rle
+%p
+  %b Minor rle:
+  = @nvs_env.minor_rle
+%p
+  %b Sequence:
+  = @nvs_env.sequence
+%p
+  %b Type:
+  = NvsEnv.types.key(@nvs_env.type_id)
+%p
+  %b Repositories:
+  %br
+  = @nvs_env.repositories
+%p
+  %b Runtime:
+  %br
+  = @nvs_env.runtime
+%p
+  %b Subsystems:
+  %br
+  = @nvs_env.subsystems
+
+- unless @nvs_envs_lcs.empty?
+  %h3
+    = t "Last changes"
+  .autoscroll
+    %table.list
+      %tr
+        %th Field
+        %th Old Value
+        %th New Value
+        %th Date
+
+      - @nvs_envs_lcs.each do |nvs_envs_lcs|
+        %tr{:class => "#{cycle('odd', 'even')}"}
+          %td= nvs_envs_lcs.field
+          %td= nvs_envs_lcs.old_value
+          %td= nvs_envs_lcs.new_value
+          %td= nvs_envs_lcs.created_at.strftime('%d %b %Y %H:%M:%S')
+
+
+    %br
+
+= link_to 'Edit', edit_nvs_env_path(@nvs_env)
+\|
+= link_to 'Back', nvs_envs_path

@@ -1,0 +1,34 @@
+= render partial: 'layouts/menu'
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_mig.name
+%p
+  %b Source env:
+  = @nvs_mig.source_env_id
+%p
+  %b Target env:
+  = @nvs_mig.target_env_id
+%p
+  %b Init date:
+  = @nvs_mig.init_date
+%p
+  %b End date:
+  = @nvs_mig.end_date
+%p
+  %b Nvs mig status:
+  = @nvs_mig.nvs_mig_status_id
+%p
+  %b Nvs process sequence:
+  = @nvs_mig.nvs_process_sequence
+%p
+  %b Nvs action sequence:
+  = @nvs_mig.nvs_action_sequence
+%p
+  %b Project:
+  = @nvs_mig.project_id
+
+= link_to 'Edit', edit_nvs_mig_path(@nvs_mig)
+\|
+= link_to 'Back', nvs_migs_path

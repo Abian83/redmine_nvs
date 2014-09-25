@@ -1,0 +1,35 @@
+= render partial: 'layouts/menu'
+%h1 Listing nvs_envs
+
+.autoscroll
+  %table.list
+    %tr
+      %th Name
+      %th Description
+      %th Mayor rle
+      %th Minor rle
+      %th Sequence
+      %th Type
+      %th Repositories
+      %th Runtime
+      %th Subsystems
+      %th
+      %th
+
+    - @nvs_envs.each do |nvs_env|
+      %tr{:class => "#{cycle('odd', 'even')}"}
+        %td= link_to nvs_env.name, nvs_env
+        %td= nvs_env.name
+        %td= nvs_env.mayor_rle
+        %td= nvs_env.minor_rle
+        %td= nvs_env.sequence
+        %td= NvsEnv.types.key(nvs_env.type_id)
+        %td= nvs_env.repositories
+        %td= nvs_env.runtime
+        %td= nvs_env.subsystems
+        %td= link_to image_tag('edit.png'), edit_nvs_env_path(nvs_env)
+        %td= link_to image_tag('delete.png'), nvs_env, :method => :delete, :data => { :confirm => (t 'Are you sure?') }
+
+  %br
+
+= link_to 'New Nvs env', new_nvs_env_path

@@ -1,0 +1,40 @@
+= render partial: 'layouts/menu'
+
+%h1 Listing nvs_mig_processes
+
+.autoscroll
+  %table.list
+    %tr
+      %th Name
+      %th Description
+      %th main process
+      %th action
+      %th action type
+      %th action seq.
+      %th process seq.
+      %th T
+      %th C
+      %th P
+      %th status
+      %th
+      %th
+
+    - @nvs_mig_processes.each do |nvs_mig_process|
+      %tr{:class => "#{cycle('odd', 'even')}"}
+        %td= link_to nvs_mig_process.name, nvs_mig_process
+        %td= nvs_mig_process.description
+        %td= nvs_mig_process.nvs_main_process
+        %td= nvs_mig_process.nvs_action
+        %td= nvs_mig_process.nvs_action_type
+        %td= nvs_mig_process.nvs_action_sequence
+        %td= nvs_mig_process.nvs_process_sequence
+        %td= nvs_mig_process.target_env_t
+        %td= nvs_mig_process.target_env_c
+        %td= nvs_mig_process.target_env_p
+        %td= nvs_mig_process.nvs_mig_status_id
+        %td= link_to image_tag('edit.png'), edit_nvs_mig_process_path(nvs_mig_process)
+        %td= link_to image_tag('delete.png'), nvs_mig_process, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Nvs mig process', new_nvs_mig_process_path

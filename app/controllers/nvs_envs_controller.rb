@@ -17,9 +17,14 @@ class NvsEnvsController < ApplicationController
   # GET /nvs_envs/1.json
   def show
     @nvs_env = NvsEnv.find(params[:id])
-    #binding.pry
-    @nvs_envs_lcs = @nvs_env.nvs_envs_lcs
-    @nvs_envs_lcs = NvsEnvsLcs.where(:nvs_env_id => @nvs_env.id)
+    #limit to list LCS    
+    if params[:show_all] == 'true'
+      @limit = @nvs_env.nvs_envs_lcss.count unless params[:show_all].nil?
+    else
+      @limit = 5
+    end
+    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @nvs_env }
@@ -46,7 +51,6 @@ class NvsEnvsController < ApplicationController
   # POST /nvs_envs.json
   def create
     @nvs_env = NvsEnv.new(params[:nvs_env])
-
     respond_to do |format|
       if @nvs_env.save
         format.html { redirect_to @nvs_env, notice: 'Nvs env was successfully created.' }

@@ -1,29 +1,39 @@
 = render partial: 'layouts/menu'
-%h1 Listing nvs_envs
+%h1 
+  = t "Environments"
 
 .autoscroll
   %table.list
     %tr
-      %th Name
-      %th Description
-      %th Mayor rle
-      %th Minor rle
-      %th Sequence
-      %th Type
-      %th Repositories
-      %th Runtime
-      %th Subsystems
+      %th 
+        = t ("Name")
+      %th 
+        = t ("Description")
+      %th 
+        = t ("Mayor rle")
+      %th 
+        = t ("Minor rle")
+      %th 
+        = t ("Sequence")
+      %th 
+        = t ("Type")
+      %th 
+        = t ("Repositories")
+      %th 
+        = t ("Runtime")
+      %th 
+        = t ("Subsystems")
       %th
       %th
 
     - @nvs_envs.each do |nvs_env|
       %tr{:class => "#{cycle('odd', 'even')}"}
         %td= link_to nvs_env.name, nvs_env
-        %td= nvs_env.name
+        %td= nvs_env.description
         %td= nvs_env.mayor_rle
         %td= nvs_env.minor_rle
         %td= nvs_env.sequence
-        %td= NvsEnv.types.key(nvs_env.type_id)
+        %td= t (NvsEnv.types.key(nvs_env.type_id))
         %td= nvs_env.repositories
         %td= nvs_env.runtime
         %td= nvs_env.subsystems
@@ -32,4 +42,4 @@
 
   %br
 
-= link_to 'New Nvs env', new_nvs_env_path
+= link_to ( t 'New Environment'), new_nvs_env_path

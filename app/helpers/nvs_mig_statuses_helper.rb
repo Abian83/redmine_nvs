@@ -1,0 +1,2 @@
+module NvsMigStatusesHelper
+end

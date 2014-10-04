@@ -2,6 +2,7 @@ class NvsMigsController < ApplicationController
   
   before_filter :find_project
   before_filter :authorize
+  before_filter :prepare_combos
 
   # GET /nvs_migs
   # GET /nvs_migs.json
@@ -45,7 +46,7 @@ class NvsMigsController < ApplicationController
   # POST /nvs_migs.json
   def create
     @nvs_mig = NvsMig.new(params[:nvs_mig])
-
+    @nvs_mig.project_id = @project.id
     respond_to do |format|
       if @nvs_mig.save
         format.html { redirect_to @nvs_mig, notice: 'Nvs mig was successfully created.' }
@@ -97,6 +98,11 @@ class NvsMigsController < ApplicationController
       @project = Project.find(session[:project_id])
     end
 
+  end
+
+  def prepare_combos
+    @nvs_envs = NvsEnv.all.map{|x| [x.name, x.id]}
+    @nvs_mig_statuses = NvsMigStatus.all.map{|x| [x.name, x.id]}
   end
 
   

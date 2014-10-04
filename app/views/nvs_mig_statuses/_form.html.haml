@@ -1,0 +1,25 @@
+= form_for @nvs_mig_status do |f|
+  - if @nvs_mig_status.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nvs_mig_status.errors.count, "error")} prohibited this nvs_mig_status from being saved:"
+      %ul
+        - @nvs_mig_status.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :is_default
+    = f.check_box :is_default
+  .field
+    = f.label :main_process
+    = f.number_field :main_process
+  .field
+    = f.label :project_id
+    = f.number_field :project_id
+  .actions
+    = f.submit 'Save'

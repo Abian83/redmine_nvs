@@ -1,12 +1,16 @@
 class NvsEnv < ActiveRecord::Base
-  attr_accessible :mayor_rle, :minor_rle, :name, :name, :project_id, :repositories, :runtime, :sequence, :subsystems, :type_id
+  attr_accessible :mayor_rle, :minor_rle, :name, :description, :project_id, :repositories, :runtime, :sequence, :subsystems, :type_id
+
+  	validates :name,:description, length: { maximum:150,
+    too_long: "%{count} characters is the maximum allowed" }, :presence => true
+    validates :mayor_rle,:minor_rle , :presence => true
 
 	belongs_to :project
-	belongs_to :nvs_envs_lcs , :class_name => 'NvsEnvsLcs', :foreign_key => 'nvs_env_id'
+	has_many :nvs_envs_lcss
 
-	before_save :check_rle,:check_sequence, :check_texts, :journalize
+	before_save :check_rle,:check_sequence, :check_texts, :change_history
 
-	as_enum :type,  {D: 0, T: 1, C: 2 ,P:3}, :prefix => 'type'
+	as_enum :type,  {DEVELOPMENT: 0, TRANSIT: 1, CERTIFICATION: 2 ,PRODUCTION:3}, :prefix => 'type'
 
 	# Check that mayor_rle > minor_rle , and set minor_rle=0 if mayor_rls has been changed.
 	def check_rle
@@ -40,24 +44,17 @@ class NvsEnv < ActiveRecord::Base
 
 	def verify_sintax(field,field_name)
 		field.split("\r\n").each_with_index do |line,idx|
-			#avoid comments
-			if /^;/.match(line) || /^[[:word:]]+=\"[[:ascii:]]+\"/.match(line) || /^[[:word:]]+=\S[[:ascii:]]+/.match(line) || /^\[[[:word:]]+\]$/.match(line)
+			if /^;/.match(line) || /^[[:word:]]+=\S([[:ascii:]]|[[:word:]])*/.match(line) || /^\[[[:word:]]+\]$/.match(line)
 				next
 			else
 				self.errors.add(field_name,'Bad format in line '  + (idx+1).to_s)
 			end
 		end
-
-		if self.errors.any?
-			return false
-		end
-
-		
-		return true
-
+		return ! (self.errors.any?)
 	end
 
-	def journalize
+
+	def change_history
 		unless self.new_record?
 			old_env = NvsEnv.find(self.id)
 			[:mayor_rle,:minor_rle,:subsystems,:runtime,:repositories,:type_id,:sequence].each do |field|
@@ -67,6 +64,7 @@ class NvsEnv < ActiveRecord::Base
 					nvs_env_lcs.field = field
 					nvs_env_lcs.old_value = old_env[field]
 					nvs_env_lcs.new_value = self[field]
+					nvs_env_lcs.updated_by = User.current
 					nvs_env_lcs.save
 				end
 				

@@ -41,3 +41,9 @@ es:
   Free goal:            Free goal
   True:                 Verdadero
   False:                Falso
+  DEVELOPMENT:          DESARROLLO
+  TRANSIT:              TRANSITO
+  CERTIFICATION:        CERTIFICACION
+  PRODUCTION:           PRODUCCION
+  label_subsystems:     subsistemas
+

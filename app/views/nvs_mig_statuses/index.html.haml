@@ -1,0 +1,26 @@
+= render partial: 'layouts/menu'
+%h1 Listing nvs_mig_statuses
+
+
+.autoscroll
+  %table.list
+    %tr
+      %th Name
+      %th Description
+      %th Is default
+      %th Main process
+      %th
+      %th
+
+    - @nvs_mig_statuses.each do |nvs_mig_status|
+      %tr{:class => "#{cycle('odd', 'even')}"}
+        %td= link_to nvs_mig_status.name, nvs_mig_status
+        %td= nvs_mig_status.description
+        %td= nvs_mig_status.is_default
+        %td= nvs_mig_status.main_process
+        %td= link_to image_tag('edit.png'), edit_nvs_mig_status_path(nvs_mig_status)
+        %td= link_to image_tag('delete.png'), nvs_mig_status, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Nvs mig status', new_nvs_mig_status_path

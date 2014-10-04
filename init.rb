@@ -40,6 +40,13 @@ Redmine::Plugin.register :redmine_nvs do
     permission :view_nvs_migs, :nvs_migs => [:index, :show]
     permission :edit_nvs_migs, :nvs_migs => [:edit,:new,:create,:destroy,:update]
 
+    permission :view_nvs_mig_statuses, :nvs_mig_statuses => [:index, :show]
+    permission :edit_nvs_mig_statuses, :nvs_mig_statuses => [:edit,:new,:create,:destroy,:update]
+
+    permission :view_nvs_mig_processes, :nvs_mig_processes => [:index, :show]
+    permission :edit_nvs_mig_processes, :nvs_mig_processes => [:edit,:new,:create,:destroy,:update]
+
+
   end
 
 end

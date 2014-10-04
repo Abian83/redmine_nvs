@@ -23,10 +23,14 @@
   = f.select :nvs_dept_id, @nvs_dept_ids
   .field
     = f.label :temp_start_date
-    = f.datetime_select :temp_start_date
+    = f.text_field :temp_start_date, :id => 'nvs_dept_user_temp_start_date'
+    = f.time_select :temp_start_date
+    = calendar_for ('nvs_dept_user_temp_start_date')
   .field
     = f.label :temp_end_date
-    = f.datetime_select :temp_end_date
+    = f.text_field :temp_end_date, :id => 'nvs_dept_user_temp_end_date'
+    = f.time_select :temp_end_date
+    = calendar_for ('nvs_dept_user_temp_end_date')
 
     -#= f.datetime_select :temp_end_date
 

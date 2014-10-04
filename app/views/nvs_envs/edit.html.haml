@@ -1,8 +1,9 @@
 = render partial: 'layouts/menu'
-%h1 Editing nvs_env
+%h1 
+	= t "Editing Environment"
 
 = render 'form'
 
-= link_to 'Show', @nvs_env
+= link_to (t 'Show'), @nvs_env
 \|
-= link_to 'Back', nvs_envs_path
+= link_to (t 'Back'), nvs_envs_path

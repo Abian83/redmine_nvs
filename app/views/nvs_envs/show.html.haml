@@ -1,58 +1,76 @@
 = render partial: 'layouts/menu'
+
+= link_to l(:button_edit), edit_nvs_env_path(@nvs_env), :onclick => 'showAndScrollTo("update", "nvs_env_name"); return false;', :class => 'icon icon-edit'
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @nvs_env.name
-%p
-  %b Name:
-  = @nvs_env.name
-%p
-  %b Mayor rle:
-  = @nvs_env.mayor_rle
-%p
-  %b Minor rle:
-  = @nvs_env.minor_rle
-%p
-  %b Sequence:
-  = @nvs_env.sequence
-%p
-  %b Type:
-  = NvsEnv.types.key(@nvs_env.type_id)
-%p
-  %b Repositories:
-  %br
-  = @nvs_env.repositories
-%p
-  %b Runtime:
-  %br
-  = @nvs_env.runtime
-%p
-  %b Subsystems:
-  %br
-  = @nvs_env.subsystems
-
-- unless @nvs_envs_lcs.empty?
-  %h3
-    = t "Last changes"
-  .autoscroll
-    %table.list
+.issue
+  .subject
+    %h3
+      = @nvs_env.name
+  %table.attributes
+    %tbody
       %tr
-        %th Field
-        %th Old Value
-        %th New Value
-        %th Date
-
-      - @nvs_envs_lcs.each do |nvs_envs_lcs|
-        %tr{:class => "#{cycle('odd', 'even')}"}
-          %td= nvs_envs_lcs.field
-          %td= nvs_envs_lcs.old_value
-          %td= nvs_envs_lcs.new_value
-          %td= nvs_envs_lcs.created_at.strftime('%d %b %Y %H:%M:%S')
-
-
+        %td
+          %b Mayor rle:
+        %td
+          = @nvs_env.mayor_rle
+        %td
+          %b Minor rle:
+        %td
+          = @nvs_env.minor_rle
+      %tr
+        %td
+          %b Sequence:
+        %td
+          = @nvs_env.sequence
+        %td
+          %b Type:
+        %td
+          = NvsEnv.types.key(@nvs_env.type_id)  
+  %p
+    %b Repositories:
     %br
+    = @nvs_env.repositories
+  %p
+    %b Runtime:
+    %br
+    = @nvs_env.runtime
+  %p
+    %b Subsystems:
+    %br
+    = @nvs_env.subsystems
 
-= link_to 'Edit', edit_nvs_env_path(@nvs_env)
+  - unless @nvs_env.nvs_envs_lcss.empty?
+    %h4
+      = t "Last changes"
+      %span.tip
+        - if @limit == 5
+          = link_to '(show all)', nvs_env_path(@nvs_env,:show_all => true)
+        - else
+          = link_to '(show less)', nvs_env_path(@nvs_env,:show_all => false)
+    .autoscroll
+      %table.list
+        %tr
+          %th Field
+          %th Old Value
+          %th New Value
+          %th Date
+          %th Updated By
+
+        - @nvs_env.nvs_envs_lcss.order('created_at desc').limit(@limit).each do |nvs_envs_lcs|
+          %tr{:class => "#{cycle('odd', 'even')}"}
+            %td= nvs_envs_lcs.field
+            %td= nvs_envs_lcs.old_value
+            %td= nvs_envs_lcs.new_value
+            %td= nvs_envs_lcs.created_at.strftime('%d %b %Y %H:%M:%S')
+            %td= nvs_envs_lcs.updated_by
+
+      %br
+
+%div#update{:style=>"display:none;"}
+  = render 'form'
+
+= link_to l(:button_edit), edit_nvs_env_path(@nvs_env), :onclick => 'showAndScrollTo("update", "nvs_env_name"); return false;', :class => 'icon icon-edit'
 \|
-= link_to 'Back', nvs_envs_path
+= link_to (t 'Back'), nvs_envs_path

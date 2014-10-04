@@ -1,0 +1,21 @@
+= render partial: 'layouts/menu'
+
+%p#notice= notice
+
+%p
+  %b Name:
+  = @nvs_mig_status.name
+%p
+  %b Description:
+  = @nvs_mig_status.description
+%p
+  %b Is default:
+  = @nvs_mig_status.is_default
+%p
+  %b Main process:
+  = @nvs_mig_status.main_process
+
+
+= link_to 'Edit', edit_nvs_mig_status_path(@nvs_mig_status)
+\|
+= link_to 'Back', nvs_mig_statuses_path

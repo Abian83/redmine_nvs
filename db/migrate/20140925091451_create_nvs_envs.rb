@@ -16,9 +16,11 @@ class CreateNvsEnvs < ActiveRecord::Migration
     end
 
     create_table :nvs_envs_lcs do |t|
+      t.integer :nvs_env_id
       t.string :field
       t.text :old_value
       t.text :new_value
+      t.integer :updated_by
       t.timestamps
     end
 

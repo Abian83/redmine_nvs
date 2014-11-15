@@ -36,14 +36,15 @@
             = link_to (t 'Users'), nvs_dept_users_path( :project_id => session[:project_id] )
           %li
             = link_to (t 'Environment'), nvs_envs_path( :project_id => session[:project_id] )
-          %li.has-sub
-            %a{:href => "#"}
-              %span
-                = t "Migration"
-            %ul
-              %li
-                = link_to (t 'Migrations'), nvs_migs_path( :project_id => session[:project_id] )
-              %li
-                = link_to (t 'Migration Statuses'), nvs_mig_statuses_path( :project_id => session[:project_id] )
-              %li
-                = link_to (t 'Migration Processes'), nvs_mig_processes_path( :project_id => session[:project_id] )                                                    
+
+    %li.has-sub
+      %a{:href => "#"}
+        %span
+          = t "Migrations"
+        %ul
+          %li
+            = link_to (t 'Migrations'), nvs_migs_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'Migration Statuses'), nvs_mig_statuses_path( :project_id => session[:project_id] )
+          %li
+            = link_to (t 'Migration Processes'), nvs_mig_processes_path( :project_id => session[:project_id] )                                                  

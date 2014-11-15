@@ -1,6 +1,6 @@
 class NvsMigStatusesController < ApplicationController
 
-  before_filter :find_project
+  before_filter :find_project, :prepare_combos
   before_filter :authorize
 
   # GET /nvs_mig_statuses
@@ -98,6 +98,11 @@ class NvsMigStatusesController < ApplicationController
       @project = Project.find(session[:project_id])
     end
 
+  end
+
+
+  def prepare_combos
+    @main_processes = NvsMigStatus.m_processes.map{|x| [x[0].to_s,x[1].to_s]}
   end
   
 end

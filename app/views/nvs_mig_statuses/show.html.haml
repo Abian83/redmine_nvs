@@ -1,21 +1,38 @@
 = render partial: 'layouts/menu'
 
+= link_to l(:button_edit), edit_nvs_mig_status_path(@nvs_mig_status), :onclick => 'showAndScrollTo("update", "nvs_mig_status_name"); return false;', :class => 'icon icon-edit'
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @nvs_mig_status.name
-%p
-  %b Description:
-  = @nvs_mig_status.description
-%p
-  %b Is default:
-  = @nvs_mig_status.is_default
-%p
-  %b Main process:
-  = @nvs_mig_status.main_process
+.issue
+	.subject
+		%h3
+			= @nvs_mig_status.name
+	%table.attributes
+		%tbody
+			%tr
+				%td
+					%b 
+						= t "Description:"
+				%td
+					= @nvs_mig_status.description
+			%tr
+				%td
+					%b
+						= t "Is default:"
+				%td
+					= @nvs_mig_status.is_default
+			%tr
+				%td
+					%b
+						= t "Main process:"
+				%td
+					= NvsMigStatus.m_processes.key(@nvs_mig_status.main_process)
 
+%div#update{:style=>"display:none;"}
+	= render 'form'
 
-= link_to 'Edit', edit_nvs_mig_status_path(@nvs_mig_status)
-\|
+= link_to l(:button_edit), edit_nvs_mig_status_path(@nvs_mig_status), :onclick => 'showAndScrollTo("update", "nvs_mig__status_name"); return false;', :class => 'icon icon-edit'
+|
 = link_to 'Back', nvs_mig_statuses_path
+

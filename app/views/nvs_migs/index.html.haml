@@ -1,17 +1,26 @@
 = render partial: 'layouts/menu'
-%h1 Listing nvs_migs
+%h1
+  = t "Migrations"
 
 .autoscroll
   %table.list
     %tr
-      %th Name
-      %th Source env
-      %th Target env
-      %th Init date
-      %th End date
-      %th Nvs mig status
-      %th Nvs process sequence
-      %th Nvs action sequence
+      %th
+        = t ("Name")
+      %th
+        = t ("Source_env")
+      %th
+        = t ( "Target_env")
+      %th
+        = t ( "Init_date")
+      %th
+        = t ( "End_date")
+      %th
+        = t ( "status")
+      %th
+        = t ( "process_sequence")
+      %th
+        = t ( "action_sequence")
       %th
       %th
       %th
@@ -23,12 +32,12 @@
         %td= nvs_mig.target_env.name unless nvs_mig.target_env.nil?
         %td= nvs_mig.init_date
         %td= nvs_mig.end_date
-        %td= nvs_mig.nvs_mig_status_id
+        %td= nvs_mig.nvs_mig_status.name unless nvs_mig.nvs_mig_status.nil?
         %td= nvs_mig.nvs_process_sequence
         %td= nvs_mig.nvs_action_sequence
-        %td= link_to 'Edit', edit_nvs_mig_path(nvs_mig)
-        %td= link_to 'Destroy', nvs_mig, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to image_tag('edit.png'), edit_nvs_mig_path(nvs_mig)
+        %td= link_to image_tag('delete.png'), nvs_mig, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   %br
 
-= link_to 'New Nvs mig', new_nvs_mig_path
+= link_to (t 'New migration'), new_nvs_mig_path

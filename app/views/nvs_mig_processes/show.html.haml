@@ -1,44 +1,70 @@
 = render partial: 'layouts/menu'
 
+= link_to l(:button_edit), edit_nvs_mig_process_path(@nvs_mig_process), :onclick => 'showAndScrollTo("update", "nvs_mig__process_name"); return false;', :class => 'icon icon-edit'
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @nvs_mig_process.name
-%p
-  %b Description:
-  = @nvs_mig_process.description
-%p
-  %b Nvs main process:
-  = @nvs_mig_process.nvs_main_process
-%p
-  %b Nvs action:
-  = @nvs_mig_process.nvs_action
-%p
-  %b Nvs action type:
-  = @nvs_mig_process.nvs_action_type
-%p
-  %b Nvs action type:
-  = @nvs_mig_process.nvs_action_type
-%p
-  %b Nvs action sequence:
-  = @nvs_mig_process.nvs_action_sequence
-%p
-  %b Nvs process sequence:
-  = @nvs_mig_process.nvs_process_sequence
-%p
-  %b Target env t:
-  = @nvs_mig_process.target_env_t
-%p
-  %b Target env c:
-  = @nvs_mig_process.target_env_c
-%p
-  %b Target env p:
-  = @nvs_mig_process.target_env_p
-%p
-  %b Nvs mig status:
-  = @nvs_mig_process.nvs_mig_status_id
+.issue
+  .subject
+    %h3
+      = @nvs_mig_process.name
+  %table.attributes
+    %tbody
+      %tr
+        %td
+          %b=t "Description:"
+        %td
+          = @nvs_mig_process.description
+        %td
+          %b=t "Main process:"
+        %td
+          = @nvs_mig_process.nvs_main_process
+      %tr
+        %td
+          %b=t "Action:"
+        %td
+          = @nvs_mig_process.nvs_action
+        %td
+          %b=t "Action type:"
+        %td
+          = @nvs_mig_process.nvs_action_type
+      %tr
+        %td
+          %b=t "Action type:"
+        %td
+          = @nvs_mig_process.nvs_action_type
+        %td
+          %b=t "Action sequence:"
+        %td
+          = @nvs_mig_process.nvs_action_sequence
+      %tr
+        %td
+          %b=t "Process sequence:"
+        %td
+          = @nvs_mig_process.nvs_process_sequence
+        %td
+          %b=t "Target env t:"
+        %td
+          = @nvs_mig_process.target_env_t
+      %tr
+        %td
+          %b=t "Target env x:"
+        %td
+          = @nvs_mig_process.target_env_c
+        %td
+          %b=t "Target env p:"
+        %td
+          = @nvs_mig_process.target_env_p
+      %tr
+        %td
+          %b=t "Mig status:"
+        %td
+          = @nvs_mig_process.nvs_mig_status_id
 
-= link_to 'Edit', edit_nvs_mig_process_path(@nvs_mig_process)
-\|
-= link_to 'Back', nvs_mig_processes_path
+
+%div#update{:style=>"display:none;"}
+  = render 'form'
+
+= link_to l(:button_edit), edit_nvs_mig_process_path(@nvs_mig_process), :onclick => 'showAndScrollTo("update", "nvs_mig_process_name"); return false;', :class => 'icon icon-edit'
+|
+= link_to (t 'Back'), nvs_mig_processes_path

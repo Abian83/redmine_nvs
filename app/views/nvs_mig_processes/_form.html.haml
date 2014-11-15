@@ -1,46 +1,42 @@
-= form_for @nvs_mig_process do |f|
-  - if @nvs_mig_process.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@nvs_mig_process.errors.count, "error")} prohibited this nvs_mig_process from being saved:"
-      %ul
-        - @nvs_mig_process.errors.full_messages.each do |msg|
-          %li= msg
+.box
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :nvs_main_process
-    = f.number_field :nvs_main_process
-  .field
-    = f.label :nvs_action
-    = f.text_field :nvs_action
-  .field
-    = f.label :nvs_action_type
-    = f.number_field :nvs_action_type
-  .field
-    = f.label :nvs_action_type
-    = f.number_field :nvs_action_type
-  .field
-    = f.label :nvs_action_sequence
-    = f.number_field :nvs_action_sequence
-  .field
-    = f.label :nvs_process_sequence
-    = f.number_field :nvs_process_sequence
-  .field
-    = f.label :target_env_t
-    = f.check_box :target_env_t
-  .field
-    = f.label :target_env_c
-    = f.check_box :target_env_c
-  .field
-    = f.label :target_env_p
-    = f.check_box :target_env_p
-  .field
-    = f.label :nvs_mig_status_id
-    = f.number_field :nvs_mig_status_id
-  .actions
-    = f.submit 'Save'
+  = form_for @nvs_mig_process do |f|
+    - if @nvs_mig_process.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@nvs_mig_process.errors.count, "error")} prohibited this nvs_mig_process from being saved:"
+        %ul
+          - @nvs_mig_process.errors.full_messages.each do |msg|
+            %li= msg
+    %textfields
+      .field
+        = f.label :name
+        = f.text_field :name
+      .field
+        = f.label :description
+        = f.text_field :description
+      .field
+        = f.label :nvs_action
+        = f.text_field :nvs_action
+      .field
+        = f.label :nvs_action_type
+        = f.select :nvs_action_type, @actiontypes
+      .field
+        = f.label :nvs_action_sequence
+        = f.number_field :nvs_action_sequence
+      .field
+        = f.label :nvs_process_sequence
+        = f.number_field :nvs_process_sequence
+      .field
+        = f.label :target_env_t
+        = f.check_box :target_env_t
+      .field
+        = f.label :target_env_c
+        = f.check_box :target_env_c
+      .field
+        = f.label :target_env_p
+        = f.check_box :target_env_p
+      .field
+        = f.label :nvs_mig_status_id
+        = f.select :nvs_mig_status_id, @mig_statuses
+      .actions
+        = f.submit 'Save'

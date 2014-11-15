@@ -12,6 +12,8 @@ class NvsEnv < ActiveRecord::Base
 
 	as_enum :type,  {DEVELOPMENT: 0, TRANSIT: 1, CERTIFICATION: 2 ,PRODUCTION:3}, :prefix => 'type'
 
+	as_enum :seq,  {DEVELOPMENT: 1, TRANSIT: 1, PRE_PRODUCTION: 2 ,PRODUCTION:3}, :prefix => 'seq'
+
 	# Check that mayor_rle > minor_rle , and set minor_rle=0 if mayor_rls has been changed.
 	def check_rle
 		unless self.new_record?
@@ -30,7 +32,15 @@ class NvsEnv < ActiveRecord::Base
 
 
 	def check_sequence
-		return true
+	unless self.new_record?
+		lastsequence = NvsEnv.find(self.id).sequence
+		case lastsequence
+		when NvsEnv.seq_DEVELOPMENT
+		when NvsEnv.seq_TRANSIT
+		when NvsEnv.seq_PRE_PRODUCTION
+		when NvsEnv.seq_PRODUCTION
+		end
+	end
 	end
 
 

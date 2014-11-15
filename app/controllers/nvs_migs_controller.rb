@@ -1,8 +1,10 @@
 class NvsMigsController < ApplicationController
-  
+
+
   before_filter :find_project
   before_filter :authorize
   before_filter :prepare_combos
+
 
   # GET /nvs_migs
   # GET /nvs_migs.json
@@ -30,7 +32,8 @@ class NvsMigsController < ApplicationController
   # GET /nvs_migs/new.json
   def new
     @nvs_mig = NvsMig.new
-
+    #TODO: 
+    @nvs_mig.name = generate_code "MIG_" , 4
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @nvs_mig }
@@ -101,9 +104,19 @@ class NvsMigsController < ApplicationController
   end
 
   def prepare_combos
-    @nvs_envs = NvsEnv.all.map{|x| [x.name, x.id]}
-    @nvs_mig_statuses = NvsMigStatus.all.map{|x| [x.name, x.id]}
+    @nvs_envs = NvsEnv.order('sequence ASC').all.map{|x| [x.name, x.id]}
+    @nvs_mig_statuses = NvsMigStatus.where(:project_id => @project.id).all.map{|x| [x.name, x.id]}
   end
 
+  def generate_code pattern, leading_size
+    migs = NvsMig.where('name REGEXP ?', '^'+pattern+'([0-9]){'+leading_size.to_s+'}$').order('name ASC')
+    unless migs.empty?
+      last_number = migs.last.name.match(/\d+$/).to_s
+      return pattern + (last_number.to_i + 1).to_s.rjust(leading_size, "0")
+    else
+      return ""
+    end
+
+  end
   
 end

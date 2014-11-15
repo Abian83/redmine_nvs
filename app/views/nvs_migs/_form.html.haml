@@ -1,36 +1,31 @@
-= form_for @nvs_mig do |f|
-  - if @nvs_mig.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@nvs_mig.errors.count, "error")} prohibited this nvs_mig from being saved:"
-      %ul
-        - @nvs_mig.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :source_env_id
-    = f.select :source_env_id, @nvs_envs
-  .field
-    = f.label :target_env_id
-    = f.select :target_env_id, @nvs_envs
-  .field
-    = f.label :init_date
-    = f.text_field :init_date, :id => 'nvs_mig_init_date'
-    = calendar_for ('nvs_mig_init_date')
-  .field
-    = f.label :end_date
-    = f.text_field :end_date , :id => 'nvs_mig_end_date'
-    = calendar_for ('nvs_mig_end_date')
-  .field
-    = f.label :nvs_mig_status_id
-    = f.select :nvs_mig_status_id, @nvs_mig_statuses
-  .field
-    = f.label :nvs_process_sequence
-    = f.text_field :nvs_process_sequence
-  .field
-    = f.label :nvs_action_sequence
-    = f.text_field :nvs_action_sequence
-  .actions
-    = f.submit 'Save'
+.box
+  = form_for @nvs_mig do |f|
+    - if @nvs_mig.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@nvs_mig.errors.count, "error")} prohibited this nvs_mig from being saved:"
+        %ul
+          - @nvs_mig.errors.full_messages.each do |msg|
+            %li= msg
+    %fieldset
+      .field
+        = f.label :name
+        = f.text_field :name
+      .field
+        = f.label :source_env_id
+        = f.select :source_env_id, @nvs_envs
+      .field
+        = f.label :target_env_id
+        = f.select :target_env_id, @nvs_envs
+      .field
+        = f.label :init_date
+        = f.text_field :init_date, :id => 'nvs_mig_init_date'
+        = calendar_for ('nvs_mig_init_date')
+      .field
+        = f.label :end_date
+        = f.text_field :end_date , :id => 'nvs_mig_end_date'
+        = calendar_for ('nvs_mig_end_date')
+      .field
+        = f.label :nvs_mig_status_id
+        = f.select :nvs_mig_status_id, @nvs_mig_statuses
+    .actions
+      = f.submit 'Save'

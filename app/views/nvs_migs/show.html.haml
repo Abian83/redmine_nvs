@@ -1,32 +1,48 @@
 = render partial: 'layouts/menu'
+
+= link_to l(:button_edit), edit_nvs_mig_path(@nvs_mig), :onclick => 'showAndScrollTo("update", "nvs_mig_name"); return false;', :class => 'icon icon-edit'
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @nvs_mig.name
-%p
-  %b Source env:
-  = @nvs_mig.source_env_id
-%p
-  %b Target env:
-  = @nvs_mig.target_env_id
-%p
-  %b Init date:
-  = @nvs_mig.init_date
-%p
-  %b End date:
-  = @nvs_mig.end_date
-%p
-  %b Nvs mig status:
-  = @nvs_mig.nvs_mig_status_id
-%p
-  %b Nvs process sequence:
-  = @nvs_mig.nvs_process_sequence
-%p
-  %b Nvs action sequence:
-  = @nvs_mig.nvs_action_sequence
+.issue
+  .subject
+    %h3
+      = @nvs_mig.name
+  %table.attributes
+    %tbody
+      %tr
+        %td
+          %b=t "Name:"
+        %td
+          = @nvs_mig.name
+        %td
+          %b=t "Init date:"
+        %td
+          = @nvs_mig.init_date
+      %tr
+        %td
+          %b=t "Source env:"
+        %td
+          = @nvs_mig.source_env.name unless @nvs_mig.source_env.blank?
+        %td
+          %b=t "End date:"
+        %td
+          = @nvs_mig.end_date
+      %tr
+        %td
+          %b=t "Target env:"
+        %td
+          = @nvs_mig.target_env.name unless @nvs_mig.target_env.blank?
+        %td
+          %b=t "Nvs mig status:"
+        %td
+          = @nvs_mig.nvs_mig_status.name unless @nvs_mig.nvs_mig_status.blank?
 
 
-= link_to 'Edit', edit_nvs_mig_path(@nvs_mig)
-\|
+
+%div#update{:style=>"display:none;"}
+  = render 'form'
+
+= link_to l(:button_edit), edit_nvs_mig_path(@nvs_mig), :onclick => 'showAndScrollTo("update", "nvs_mig_name"); return false;', :class => 'icon icon-edit'
+|
 = link_to 'Back', nvs_migs_path

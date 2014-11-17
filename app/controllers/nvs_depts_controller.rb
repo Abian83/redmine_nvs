@@ -129,10 +129,33 @@ class NvsDeptsController < ApplicationController
   end
 
   def users2dept
-    @depts = NvsDept.all.map{|x| [x.name,x.id]}
-    @users = User.all.map{|x| [x.name,x.id]}
-    @authLevels = NvsDeptUser.levels.map{|x| [x[0].to_s,x[1].to_s]}
-    @tmp_authLevels = NvsDeptUser.temp_levels.map{|x| [x[0].to_s,x[1].to_s]}
+    if params["users_selected"]
+      dept = NvsDept.find params["Departaments"]
+      errors = []
+      info = []
+      params["users_selected"].each do |u|
+        deptUser = NvsDeptUser.where(:user_id => u).first
+        deptUser.nvs_dept_id = dept.id
+        unless deptUser.save
+          errors << deptUser.errors
+        else
+          info << deptUser.user.name + " "
+        end
+      end
+      if errors.empty?
+        flash.now[:notice] = "User added to " + dept.name + " : " + info.to_s
+      else
+        flash.now[:error] = "something was wrong"
+      end
+    end
+
+      @depts = NvsDept.all.map{|x| [x.name,x.id]}
+      @users = User.all.map{|x| [x.name,x.id]}
+      @authLevels = NvsDeptUser.levels.map{|x| [x[0].to_s,x[1].to_s]}
+      @tmp_authLevels = NvsDeptUser.temp_levels.map{|x| [x[0].to_s,x[1].to_s]}
+
+
+
   end
 
 

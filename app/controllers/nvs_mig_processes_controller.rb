@@ -46,6 +46,9 @@ class NvsMigProcessesController < ApplicationController
   def create
     @nvs_mig_process = NvsMigProcess.new(params[:nvs_mig_process])
 
+    status = NvsMigStatus.find params[:nvs_mig_process][:nvs_mig_status_id]
+    @nvs_mig_process.nvs_main_process = status.main_process unless status.nil?
+
     respond_to do |format|
       if @nvs_mig_process.save
         format.html { redirect_to @nvs_mig_process, notice: 'Nvs mig process was successfully created.' }
@@ -61,7 +64,8 @@ class NvsMigProcessesController < ApplicationController
   # PUT /nvs_mig_processes/1.json
   def update
     @nvs_mig_process = NvsMigProcess.find(params[:id])
-
+    status = NvsMigStatus.find params[:nvs_mig_process][:nvs_mig_status_id]
+    @nvs_mig_process.nvs_main_process = status.main_process unless status.nil?
     respond_to do |format|
       if @nvs_mig_process.update_attributes(params[:nvs_mig_process])
         format.html { redirect_to @nvs_mig_process, notice: 'Nvs mig process was successfully updated.' }

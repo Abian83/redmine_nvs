@@ -23,7 +23,7 @@
       %tr{:class => "#{cycle('odd', 'even')}"}
         %td= link_to nvs_mig_process.name, nvs_mig_process
         %td= nvs_mig_process.description
-        %td= nvs_mig_process.nvs_main_process
+        %td= NvsMigStatus.m_processes.key(nvs_mig_process.nvs_main_process).to_s
         %td= nvs_mig_process.nvs_action
         %td= nvs_mig_process.nvs_action_type
         %td= nvs_mig_process.nvs_action_sequence

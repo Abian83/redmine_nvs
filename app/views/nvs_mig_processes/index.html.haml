@@ -1,6 +1,7 @@
 = render partial: 'layouts/menu'
 
-%h1 Listing nvs_mig_processes
+%h1
+  = t 'Migration Process List'
 
 .autoscroll
   %table.list
@@ -37,4 +38,4 @@
 
 %br
 
-= link_to 'New Nvs mig process', new_nvs_mig_process_path
+= link_to (t'New Migration Process'), new_nvs_mig_process_path

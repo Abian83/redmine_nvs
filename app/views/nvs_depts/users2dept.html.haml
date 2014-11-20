@@ -1,12 +1,12 @@
 = render partial: 'layouts/menu'
 %h1
-  = "Add users to one dept"
+  = t "Add users Departaments"
 
 = form_tag(users2dept_nvs_depts_path, method: :get) do
   .fields
     = select_tag "Departaments" , options_for_select(@depts)
+    %br
   %table
-    -
     - @users.each do |user|
       %tr
         %td
@@ -14,6 +14,6 @@
           = user[0].to_s
 
 
-
+%br
   .actions
-    = submit_tag 'enviar'
+    = submit_tag (t 'Save')

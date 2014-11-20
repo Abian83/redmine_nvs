@@ -1,6 +1,7 @@
 = render partial: 'layouts/menu'
-%h1 New nvs_mig_status
+%h1
+	= t 'New Migration Status'
 
 = render 'form'
 
-= link_to 'Back', nvs_mig_statuses_path
+= link_to (t'Back'), nvs_mig_statuses_path

@@ -22,11 +22,11 @@
               %li
                 = link_to (t 'Index'), nvs_depts_path( :project_id => session[:project_id] )
               %li
-                = link_to (t 'Add users to dept'),  users2dept_nvs_depts_path
+                = link_to (t 'Add users'),  users2dept_nvs_depts_path
           %li.has-sub
             %a{:href => "#"}
               %span
-                = t "Goal"
+                = t "Goals"
             %ul
               %li
                 = link_to (t 'Goals'), nvs_goals_path( :project_id => session[:project_id] )
@@ -35,7 +35,7 @@
           %li
             = link_to (t 'Users'), nvs_dept_users_path( :project_id => session[:project_id] )
           %li
-            = link_to (t 'Environment'), nvs_envs_path( :project_id => session[:project_id] )
+            = link_to (t 'Environments'), nvs_envs_path( :project_id => session[:project_id] )
 
     %li.has-sub
       %a{:href => "#"}

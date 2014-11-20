@@ -18,7 +18,7 @@
         = f.label :is_default
         = f.check_box :is_default
       .field
-        = f.label :main_process
+        = f.label (t 'Main Process')
         = f.select :main_process, @main_processes
       .actions
-        = f.submit 'Save'
+        = f.submit (t 'Save')

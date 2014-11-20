@@ -1,5 +1,5 @@
 = render partial: 'layouts/menu'
-%h1 Listing nvs_mig_statuses
+%h1= t 'Migration Status List'
 
 
 .autoscroll
@@ -23,4 +23,4 @@
 
 %br
 
-= link_to 'New Nvs mig status', new_nvs_mig_status_path
+= link_to (t 'New Migration Status'), new_nvs_mig_status_path

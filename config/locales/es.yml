@@ -18,7 +18,7 @@ es:
   Back:                   Atrás
   Index:                  Mostrar
   Departament Project List:         Lista de Proyectos de Departamento
-  Departament of Projects:     Proyectos de Departamanto
+  Departament of Projects:     Proyectos de Departamento
   Save:                   Guardar
   Departaments:           Departamentos
   Projects Already related:       Proyectos ya relacionados
@@ -47,4 +47,22 @@ es:
   PRODUCTION:           PRODUCCION
   label_subsystems:     subsistemas
   Nvs_action_sequence:  action_sequence
+  New Departament Project: Nuevo Projecto de Departamento
+  Departament List: Departamentos
+  New departament:  Nuevo Departamento
+  Add users: Añadir Usuarios
+  Add users Departaments: Añadir usuarios a Departamentos
+  Environments:  Entornos
+  New Environment: Nuevo Entorno
+  Migrations: Migraciones
+  Migration Statuses: Estado de Mig
+  Migration Processes: Procesos de Mig
+  New Migration: Nueva Migracion
+  New Migration Status: Nuevo Estado
+  Migration Status List: Estados de Migraciones
+  Main Process: Proceso Principal
+  Migration Process List: Procesos de Migraciones
+  New Migration Process: Nuevo Proceso
+
+
 

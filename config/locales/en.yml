@@ -1,3 +1,67 @@
-# English strings go here for Rails i18n
+# Spanish strings go here for Rails i18n
 en:
-  # my_label: "My label"
+
+  Subsystem List:         Subsystem List
+  Internal Name:          Internal Name
+  New Subsystem:          New Subsystem
+  Are you sure?:          Are you sure?
+  Name:                   Name
+  Project:                Project
+  Projects:               Projects
+  Save:                   Save
+  Project Id:             Project Id
+  Home:                   Home
+  Subsystems:             Subsystems
+  New:                    New
+  Show:                   Show
+  Edit:                   Edit
+  Back:                   Back
+  Index:                  Index
+  Departament Project List:         Departament Project List
+  Departament of Projects:     Departament of Projects
+  Departaments:           Departamentos
+  Projects Already related:       Projects Already related
+  Projects to relate with:        Projects to relate with
+  Edit Subsystem:                 Edit Subsystem
+  Goals:                          Goals
+  Description:                    Description
+  Created on:         Created on
+  Created by:         Created by
+  Goal type:          Goal type
+  Goal Types:         Goal Types
+  Ext goal reference:   Ext goal reference
+  New Goal:             New Goal
+  Users:                Users
+  Edit Goal:            Edit Goal
+  New goal type:        New goal type
+  Edit goal type:       Edit goal type
+  sql connect:          sql connect
+  sql access:           sql access
+  Free goal:            Free goal
+  True:                 True
+  False:                False
+  DEVELOPMENT:          DEVELOPMENT
+  TRANSIT:              TRANSIT
+  CERTIFICATION:        CERTIFICATION
+  PRODUCTION:           PRODUCTION
+  label_subsystems:     subsystems
+  Nvs_action_sequence:  action_sequence
+  New Departament Project: New Departament Project
+  Departament List: Departament List
+  New departament:  New departament
+  Add users: Add users
+  Add users Departaments: Add users Departaments
+  Environments:  Environments
+  New Environment: New Environment
+  Migrations: Migrations
+  Migration Statuses: Migration Statuses
+  Migration Processes: Migration Processes
+  New Migration: New Migration
+  New Migration Status: New Migration Status
+  Migration Status List: Migration Status List
+  Main Process: Main Process
+  Migration Process List: Migration Process List
+  New Migration Process: New Migration Process
+
+
+

@@ -44,7 +44,6 @@ class NvsDeptProjectsController < ApplicationController
   # POST /nvs_dept_projects
   # POST /nvs_dept_projects.json
   def create
-    #binding.pry
     @nvs_dept_project = NvsDeptProject.new(params[:nvs_dept_project])
     @nvs_dept_project.nvs_subsystem_id = 0
     @nvs_dept_project.nvs_dept_id = 0
